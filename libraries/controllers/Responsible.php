@@ -7,11 +7,11 @@ class Responsible extends Controller{
     protected $view2="responsible/manageResponsible";
     protected $modelName = \models\Responsible::class;
     public function addResponsible(){
-      global $error_msg;
-        $error_msg = ' ';
-        $name_resp = ' ';
-        $firstname_resp = ' ';
-        $function_resp = " ";
+       global $error_msg;
+        $error_msg = '';
+        $name_resp = '';
+        $firstname_resp = '';
+        $function_resp = "";
         if(isset($_POST['add_resp'])){
         if(isset($_POST['name_resp']) && isset($_POST['firstname_resp']) && isset($_POST['function_resp'])){
             if(!empty($_POST['name_resp']) && !empty($_POST['firstname_resp']) && !empty($_POST['function_resp']) && !empty($_FILES['image']['name'])){

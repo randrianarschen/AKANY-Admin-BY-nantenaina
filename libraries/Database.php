@@ -12,21 +12,29 @@ class Database
     }
     return self::$instance;
   }
-  public static function verifyFile( array $varNeeded,  array $variables = []){
-   extract($varNeeded);
+  public static function verifyFile(array $varNeeded,  array $variables = [])
+  {
+    extract($varNeeded);
     global $error_msg;
+    global $success;
+    $success = '';
     $allowed_ext = array('jpg', 'jpeg', 'gif', 'png');
     if (in_array($file_ext, $allowed_ext)) {
-      $target = "views/images/$domain/".$image;
-      if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {  
-       
-       $Model->$modelMethod( $variables);
-       $error_msg = \Renderer::showError('Votre demande a été envoyé avec succès', 'success');
-      } else {
-        $error_msg = \Renderer::showError("Désolé, une erreur s'est produite lors du téléchargement de votre fichier.", 'danger');
-      }
+      $target = "views/images/$domain/" . $image;
+      
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+
+          $Model->$modelMethod($variables);
+          $success = true;
+          $error_msg = \Renderer::showError('Votre demande a été envoyé avec succès', 'success');
+        } else {
+          $error_msg = \Renderer::showError("Désolé, une erreur s'est produite lors du téléversement de votre fichier.", 'danger');
+          $success = false;
+        }
+     
     } else {
       $error_msg = \Renderer::showError("Désolé, seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés pour la photo.", 'danger');
+      $success = false;
     }
   }
 }

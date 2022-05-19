@@ -29,7 +29,7 @@ class Model
   {
 
     $delete = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
-    $delete->execute([$id]);
+    $delete->execute(['id'=>$id]);
   }
   public function updateOne( array $td = [])
   {

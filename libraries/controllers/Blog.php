@@ -12,10 +12,10 @@ class Blog extends Controller
     public function addBlog()
     {
         global $error_msg;
-        $error_msg = ' ';
-        $object = ' ';
-        $contain_1 = " ";
-        $contain_2 = " ";
+        $error_msg = '';
+        $object = '';
+        $contain_1 = "";
+        $contain_2 = "";
         if (isset($_POST['add_blog'])) {
             if (isset($_POST['object']) && isset($_POST['contain_1']) && isset($_POST['contain_2'])) {
                 if (!empty($_POST['object']) && !empty($_POST['contain_1']) && !empty($_POST['contain_2']) && !empty($_FILES['image']['name'])) {

@@ -17,7 +17,6 @@ class Witness extends Controller
     $title = "";
     $function = " ";
     $link_video = " ";
-
     if (isset($_POST['add_witness'])) {
       if (isset($_POST['name_witness']) && isset($_POST['title']) && isset($_POST['function']) && isset($_POST['link_video'])) {
         if (!empty($_POST['name_witness']) && !empty($_POST['title']) && !empty($_POST['function']) && !empty($_POST['link_video']) && !empty($_FILES['image']['name'])) {

@@ -1,67 +1,55 @@
-<div class="card-body">
-    <p id="error_msg"> <?= $error_msg; ?></p>
-    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-        <div class="row">
-            <div class="col-sm-12 col-md-6"></div>
-            <div class="col-sm-12 col-md-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="wrapper">
-                    <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
-                        <tr>
-                            <th>Titre</th>
-                            <th>Date</th>
-                            <th>Heure</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Action</th>
-                        </tr>
-                        <?php
-                        $i = 0;
-                        foreach ($events as $event) {
-                            $i++;
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Toutes les évènements</h3>
 
-                        ?>
-                            <tr id="<?= 'row' . $i; ?>">
-                            <form>
-                                <td id="<?= 'title_row' . $i; ?>"><?= $event['title_event']; ?></td>
-                                <td id="<?= 'date_row' . $i; ?>"><?= $event['date_event']; ?></td>
-                                <td id="<?= 'time_row' . $i; ?>"><?= $event['time_event']; ?></td>
-                                <td id="<?= 'desc_row' . $i; ?>"><?= $event['description_event']; ?></td>
-                                <td id="img_row<?= $i; ?>"><img id="<?= 'event_img' . $i; ?>" src="./views/images/events/<?= $event['image']; ?>" alt="" width="100px" height="100px"></td>
-                                <td>
-                                    <input type="button" id="<?= 'edit_button' . $i; ?>" value="Edit" class="edit" onclick="edit_row('<?= $i; ?>')">
-                                    <input type="button" id="<?= 'save_button' . $i; ?>" value="Save" class="save" style="display:none;" onclick="save_row('<?= $i; ?>')">
-                                    <input type="button" value="Delete" class="delete" onclick="delete_row('<?= $i; ?>')">
-                                </td>
-                        </form>
-                            </tr>
-                        <?php
-                        } ?>
-                        <br>
-                        <tr>
-                         <!-- <form id="add_form" enctype="multipart/form-data" method="POST">
-                            <td><input type="text" id="new_title"></td>
-                            <td><input type="date" id="new_date"></td>
-                            <td><input type="time" id="new_time"></td>
-                            <td><input type="text" id="new_desc"></td>
-                            <td>
-                                <img id="blah" style="display:none;" src="" alt="your image" width="100px" height="100px" />
-                                <div>
-                                    <span class="btn btn-file btn-success"><span class="fileupload-new">Select image</span><input type="file" class="img" id="imgInp" onchange="showPreview(event);"></span>
-                                </div>
-                            </td>
-                            <td><input type="button" class="add" onclick="add_row();" value="Add Row"><a href="index.php?controller=events&task=addEvent">add</a></td>
-                    </form> -->
-                        </tr>
+      
 
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 10px">N°</th>
+                    <th>Titre</th>
+                    <th>Date et heure</th>
+                    <th >Description</th>
+                    <th>Image</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $i = 0;
+                foreach ($events as $event) {
+                    $i++;
+
+                ?>
+                    <tr id="<?= 'row' . $i; ?>">
+                        <td><?= $i ?>.</td>
+                        <input type="hidden" id="<?= 'id' . $i; ?>" value="<?= $event['id']; ?>" name="id">
+                        <td class="td<?=$i;?>"  id="<?= 'td1' . $i; ?>"> <?= $event['title_event']; ?></td>
+                        <td  class="td<?=$i;?>" id="<?= 'td2' . $i; ?>"><?= $event['datetime_event']; ?></td>
+                        <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><?= $event['description_event']; ?></td>
+                        <td  class="td<?=$i;?>" id="<?= 'td5' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Events/<?= $event['image']; ?>" alt="" width="100px" height="100px"></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>" class="edit" onclick="edit_row(event,'<?= $i; ?>')"> <i class="fas fa-pencil-alt"></i></button>
+                            <button type="button" class="btn btn-secondary btn-sm" id="<?= 'cancel' . $i ?>" style="display:none" onclick="cancel(event, '<?= $i; ?>')"><i class="fas fa-ban"></i></button>
+                            <button type="sumbit" id="<?= 'save_button' . $i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'events','updateRowEvent');"><i class="fas fa-check"></i></button>
+
+                            <button type="submit" class="btn btn-danger btn-sm" class="delete" onclick="delete_row(event, '<?= $i; ?>', 'events')"><i class="fas fa-trash"></i></button>
+
+                        </td>
+                    </tr>
+                <?php
+                } ?>
+            </tbody>
+        </table>
+       
+    </div> 
+    
+</div>
+<div class="row">
+            <div class="col-sm-12 col-md-4">
                 <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
             </div>
             <div class="col-sm-12 col-md-7">
@@ -79,5 +67,3 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>

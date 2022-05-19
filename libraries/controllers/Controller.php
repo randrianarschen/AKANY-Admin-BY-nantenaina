@@ -25,27 +25,18 @@ abstract class Controller {
         $pageTitle = $this->pageTitle;
         \Renderer::render($this->view2, compact('pageTitle'));
     }
-    public function update(){
-        if(isset($_GET['id']) && !empty($_GET['id'])){
-            $id = $_GET['id'];
-             $this->model->update($id);
-         $success = 1;
-        }
-        else{
-            $success = 0;
-        }
-    }
+   
     public function delete(): void{
                  if(isset($_GET['id'] )&& !empty($_GET['id'])){
                     $id = $_GET['id'];
-                    $this->model->delete($id);
-                    $success ="1";
+                    $this->model->deleteOne($id);
+                    $success =true;
                  }
                  else
                   {
-                      $success ="0";
+                      $success = false;
                   }
-                  json_encode($success);
+                 echo json_encode(['success' => $success]);
                  
     }
 }

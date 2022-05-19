@@ -50,10 +50,11 @@ class Donation extends Controller
    *
    * @return void
    */
-  public function index()
+  public function manageAsking()
   {
     $pageTitle = $this->pageTitle;
     $donations = $this->model->findAll();
-    \Renderer::render('donation/index', compact('pageTitle', 'donations'));
+    \Renderer::render('donation/manageAsking', compact('pageTitle', 'donations'));
   }
+  
 }

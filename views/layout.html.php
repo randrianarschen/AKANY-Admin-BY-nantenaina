@@ -260,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a id="gift2"  href="index.php?controller=donation&task=index" class="nav-link ">
+                  <a id="gift2"  href="index.php?controller=donation&task=manageAsking" class="nav-link ">
                     <i class="fa-solid fa-filter-circle-dollar"></i>
                     <p>Gerer les dons</p>
                   </a>
@@ -368,7 +368,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a id="setting2" href="index.php?controller=contact&task=updateContact" class="nav-link  ">
+                  <a id="setting2" href="index.php?controller=contact&task=updateContact" class="nav-link">
                     <i class="fa-solid fa-square-pen"></i>
                     <p>Mise à jour des contacts</p>
                   </a>
@@ -385,7 +385,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper"> 
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
@@ -395,13 +395,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item active"><?= $pageTitle ?></li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-      </div>
+    </div>
+  
       <!-- /.content-header -->
 
       <!-- Main content -->
@@ -411,6 +412,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content -->
+    </div>
     </div>
     <!-- /.content-wrapper -->
 
@@ -469,6 +471,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </script>
   <script src="https://kit.fontawesome.com/9979a01860.js" crossorigin="anonymous"></script>
   <script src="./views/javascript/event.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>

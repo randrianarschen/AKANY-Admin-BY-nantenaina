@@ -44,10 +44,11 @@ class Renderer
        </div>';
         if ($error_mode == 'success') {
             $error = '<script>
+            
         swal({
           title: "SUCCES",
           icon: "success",
-          text: "l\'article a été ajouté avec succès",
+          text:"' . $error_message . '",
         });
         </script>';
         }
