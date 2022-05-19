@@ -78,7 +78,7 @@ var controller = new AbortController();
   var signal = controller.signal;
 var sendRequest = async (url, data) => {
  
-  const request = await fetch(url,{method:'POST', body: data});
+  const request = await fetch(url, {method:'POST', body: data});
    console.log(request);
   
       const response = await request.json();
@@ -176,19 +176,22 @@ if(fileArray.length > 0){
   data.append('image', img);
   sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
     console.log(response);
+  
     if(response.success === true) {
+     
+      
       var srcNew = document.getElementById("blah"+no).src;
+      var val =document.getElementsByClassName("iden"+no);
+       var td =  document.getElementsByClassName("td"+no);
       for(let j = 0; j<tdLength; j++){
-        let val = [];
-        let td = [];
-     val =document.getElementsByClassName("iden"+no).value;
-    td =  document.getElementsByClassName("td"+no);
-   
+     
+    console.log("im here eorzeoruizeurozeir oezurouezr");
     if(j === tdLength-1){
     td[j].innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
   } 
   else{
-     td[j].innerHTML=val[j];
+     td[j].innerHTML=val[j].value;
+     console.log(val[j]);
   }
 } 
    document.getElementById("edit_button"+no).style.display="block";
