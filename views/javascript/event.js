@@ -105,42 +105,51 @@ var abortDeleting = async () => {
   console.log('now aborting');
 }
 
-function cancel(event, no){
-  event.preventDefault();
-  var val1=document.getElementById("iden1"+no).value;
-  var val2=document.getElementById("iden2"+no).value;
-  var val3=document.getElementById("iden3"+no).value;
-  var val4=document.getElementById("iden4"+no).value;
-  var srcNew = document.getElementById("blah"+no).src;
-  document.getElementById("td1"+no).innerHTML=val1;
-  document.getElementById("td2"+no).innerHTML=val2;
-  document.getElementById("td3"+no).innerHTML=val3;
-  document.getElementById("td4"+no).innerHTML=val4;
-  document.getElementById("td5"+no).innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
-  document.getElementById("edit_button"+no).style.display="block";
-  document.getElementById("save_button"+no).style.display="none";
-  document.getElementById("cancel"+no).style.display="none";
+// function cancel(event, no, tdLength){
+//   event.preventDefault();
+//   document.getElementById("edit_button"+no).style.display="block";
+//   document.getElementById("delete_button"+no).style.display="block";
+//   document.getElementById("save_button"+no).style.display="none";
+//   document.getElementById("cancel"+no).style.display="none"; 
+//   var val =  document.getElementsByClassName("iden"+no);
+//  var td =  document.getElementsByClassName("td"+no);
+//  console.log(val);
+//   for(let g = 0; g< tdLength; g++){ 
+  
+//  if( g === tdLength-1){ 
+//     var srcNew = document.getElementById("blah"+no).src;
+//   td[g].innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
+//    }
+//    else{
+//      let values =[]; 
+//     values[g]=val[g].value;
+//      td[g].innerHTML=values[g];
+//    }
+//   }
+    
 
-}
+// }
 
 function edit_row(event, no, tdLength)
 {
   event.preventDefault();
  document.getElementById("edit_button"+no).style.display="none";
  document.getElementById("save_button"+no).style.display="block";
- document.getElementById("cancel"+no).style.display="block";
- var src = document.getElementById("image"+no+"").src;
+ document.getElementById("delete_button"+no).style.display="none";
+  // document.getElementById("cancel"+no).style.display="block";
+ var td= document.getElementsByClassName("td"+no); 
+ var row = document.getElementById('row'+no); 
  for(let k = 0; k<tdLength; k++){
- var row = document.getElementById('row'+no);
- 
- var td = document.getElementsClassName("td"+no);
- var val;
- val[k] = td[k].innerHTML;
- td[k].innerHTML="<input type='text' id='iden"+no+"' value='"+val[k]+"'>";
+ let val;
+ val = td[k].innerHTML;
  if(k == 1){
-   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' value='"+val[k]+"'>";
- }else if(k=== k-1){
+   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' value='"+val+"'>";
+ }else if(k=== tdLength-1){
+  var src = document.getElementById("image"+no+"").src;
    td[k].innerHTML = "<img id='blah"+no+"' style='display:block;' src='"+src+"'  width='100px' height='100px'><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Select image</span><input type='file' class='imgToEdit' name='image'  accept='.jpg, .jpeg, .gif, .png'    required id='img"+no+"' onchange='showPreview(event, "+no+");'></span></div>";
+ }
+ else{
+  td[k].innerHTML="<input type='text' class ='iden"+no+"' value='"+val+"'>";
  }
  }
  console.log('you can edit it');
@@ -151,40 +160,38 @@ function edit_row(event, no, tdLength)
 {   
   event.preventDefault();
   var id = document.getElementById("id"+no).value;
-  for(let l = 0; l<tdLength; l++){
-  var value1=document.getElementById("iden1"+no).value;
-  var value2=document.getElementById("iden2"+no).value;
-  var value3=document.getElementById("iden3"+no).value;
-  var value4=document.getElementById("iden4"+no).value;
-
+  var data = new FormData();
+   data.append('id', id);
+ var val=document.getElementsByClassName("iden"+no) ; 
+ console.log(val);
+  for(let l = 0; l<tdLength-1; l++){ 
+   data.append('val'+(l+1), val[l].value);
  ;}
+
   var fileArray = document.getElementById("img"+no).files;
-var img = fileArray[0] ;console.log(img);
+var img = fileArray[0] ;
 //  let data = {id:id, val1:value1, val2:value2, val3:value3, val4:value4, image:img};
 if(fileArray.length > 0){
-  var data = new FormData(); 
-  data.append('id', id);
-  data.append('val1', value1);
-  data.append('val2', value2);
-  data.append('val3', value3);
-  data.append('val4', value4);
+  
   data.append('image', img);
   sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
     console.log(response);
     if(response.success === true) {
-    var val1=document.getElementById("iden1"+no).value;
-    var val2=document.getElementById("iden2"+no).value;
-    var val3=document.getElementById("iden3"+no).value;
-    var val4=document.getElementById("iden4"+no).value;
-    var srcNew = document.getElementById("blah"+no).src;
-    document.getElementById("td1"+no).innerHTML=val1;
-    document.getElementById("td2"+no).innerHTML=val2;
-    document.getElementById("td3"+no).innerHTML=val3;
-    document.getElementById("td4"+no).innerHTML=val4;
-    document.getElementById("td5"+no).innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
-    document.getElementById("edit_button"+no).style.display="block";
+      var srcNew = document.getElementById("blah"+no).src;
+      for(let j = 0; j<tdLength; j++){
+        
+    var val =document.getElementsByClassName("iden"+no).value;
+   var td =  document.getElementsByClassName("td"+no);
+   
+    if(j === tdLength-1){
+    td[j].innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
+  } 
+  else{
+     td[j].innerHTML=val[j];
+  }
+} 
+   document.getElementById("edit_button"+no).style.display="block";
     document.getElementById("save_button"+no).style.display="none";
-    document.getElementById("cancel"+no).style.display="none";
     } else
     {
     

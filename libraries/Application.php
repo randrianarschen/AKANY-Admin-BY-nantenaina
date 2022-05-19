@@ -5,8 +5,6 @@ class Application {
     {
         $controllerName = "Home";
         $task = "index";
-        $param1= " ";
-        $param2= " ";
         if (!empty($_GET['controller'])) {
             $controllerName = ucfirst($_GET['controller']);
         }
