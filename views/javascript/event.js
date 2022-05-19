@@ -179,9 +179,10 @@ if(fileArray.length > 0){
     if(response.success === true) {
       var srcNew = document.getElementById("blah"+no).src;
       for(let j = 0; j<tdLength; j++){
-        
-    var val =document.getElementsByClassName("iden"+no).value;
-   var td =  document.getElementsByClassName("td"+no);
+        let val = [];
+        let td = [];
+     val =document.getElementsByClassName("iden"+no).value;
+    td =  document.getElementsByClassName("td"+no);
    
     if(j === tdLength-1){
     td[j].innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
@@ -199,7 +200,6 @@ if(fileArray.length > 0){
     }
   
   }).catch(error=>{
-    console.log(error.message);
     
      document.getElementById('error_msg').innerHTML ="<div class='alert alert-danger' role='alert'>"+error.message+"</div>";
   });
