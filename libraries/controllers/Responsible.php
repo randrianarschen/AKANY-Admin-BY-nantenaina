@@ -43,7 +43,6 @@ public function manageResponsible(){
 public function updateRowResp(){
    
     $response = array();
-     
         global $success;
         global $error_msg;
         $error_msg = 'bon ok';
@@ -55,11 +54,21 @@ public function updateRowResp(){
           $Model = $this->model;
           $modelMethod = 'updateOne';
           $domain = "responsibles";
-          $img = $_FILES['image']['name'];
-          $ext = explode('.', $img);
-          $file_ext = strtolower(end($ext));
-          $image = rand(1, 1000000) . '.' . $file_ext;
-          \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('name_resp','firstname_resp', 'function', 'image','id'));
+          if(!empty($_FILES['image']['name'])){
+            $img = $_FILES['image']['name'];
+            $ext = explode('.', $img);
+            $file_ext = strtolower(end($ext));
+            $image = rand(1, 1000000) . '.' . $file_ext;
+            \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('title_event','datetime_event', 'description_event','image','id'));
+            }else{
+              $img = $_POST['image'];
+              $ext = explode('.', $img);
+              $file_ext = strtolower(end($ext));
+              $image = rand(1, 1000000) . '.' . $file_ext;
+              $this->model->updateOne( compact('title_event','datetime_event', 'description_event','image','id'));
+             $success = true;
+            }
+    
           $response = array(
             'success' => $success,);
          echo json_encode($response);

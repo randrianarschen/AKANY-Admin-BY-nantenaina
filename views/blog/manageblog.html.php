@@ -28,7 +28,7 @@
                         <td  class="td<?=$i;?>"  id="<?= 'td1' . $i; ?>"> <?= $blog['object']; ?></td>
                           <td  class="td<?=$i;?>" id="<?= 'td2'. $i; ?>"><?= $blog['contain_1']; ?></td>
                           <td  class="td<?=$i;?>" id="<?= 'td3' . $i; ?>"><?= $blog['contain_2']; ?></td>
-                        <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Events/<?= $blog['image']; ?>" alt="" width="100px" height="100px"></td>
+                        <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Blogs/<?= $blog['image']; ?>" alt="" width="100px" height="100px"></td>
                         <td>
                             <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>"  onclick="edit_row(event,'<?= $i; ?>', 4)"> <i class="fas fa-pencil-alt"></i></button>
                             <button type ="submit" class="btn btn-danger btn-sm" id="<?='cancel_button'.$i;?>" onclick="cancel(event, '<?=$i;?>', 'blog','anulate');" style="display:none;"><i class="fa-solid fa-ban"></i></button>

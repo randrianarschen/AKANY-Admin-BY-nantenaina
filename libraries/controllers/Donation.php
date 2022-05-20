@@ -72,11 +72,21 @@ class Donation extends Controller
           $Model = $this->model;
           $modelMethod = 'updateOne';
           $domain = "donation";
-          $img = $_FILES['image']['name'];
-          $ext = explode('.', $img);
-          $file_ext = strtolower(end($ext));
-          $image = rand(1, 1000000) . '.' . $file_ext;
-          \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('sujet','montant', 'motif','image', 'cree_a','id'));
+          if(!empty($_FILES['image']['name'])) {
+            $img = $_FILES['image']['name'];   
+            $ext = explode('.', $img);
+            $file_ext = strtolower(end($ext));
+            $image = rand(1, 1000000) . '.' . $file_ext;
+            \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('sujet','montant', 'motif','image', 'cree_a','id'));
+          } else {
+              $img =$_POST['image'];
+              $ext = explode('.', $img);
+              $file_ext = strtolower(end($ext));
+              $image = rand(1, 1000000) . '.' . $file_ext;
+              $this->model->updateOne(compact('sujet','montant', 'motif','image', 'cree_a','id'));
+              $success = true;
+          }
+          
           $response = array(
             'success' => $success,);
          echo json_encode($response);
