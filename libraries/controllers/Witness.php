@@ -68,11 +68,21 @@ class Witness extends Controller
           $Model = $this->model;
           $modelMethod = 'updateOne';
           $domain = "witnesses";
-          $img = $_FILES['image']['name'];
-          $ext = explode('.', $img);
-          $file_ext = strtolower(end($ext));
-          $image = rand(1, 1000000) . '.' . $file_ext;
-          \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('name_witness', 'title', 'function',  'link_video','image', 'date_publication', 'id'));
+          if(!empty($_FILES['image']['name'])) {
+            $img = $_FILES['image']['name'];   
+            $ext = explode('.', $img);
+            $file_ext = strtolower(end($ext));
+            $image = rand(1, 1000000) . '.' . $file_ext;
+            \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('name_witness', 'title', 'function',  'link_video','image', 'date_publication', 'id'));
+          } else {
+              $img =$_POST['image'];
+              $ext = explode('.', $img);
+              $file_ext = strtolower(end($ext));
+              $image = rand(1, 1000000) . '.' . $file_ext;
+              $this->model->updateOne(compact('name_witness', 'title', 'function', 'link_video', 'image', 'date_publication', 'id'));
+              $success = true;
+          }
+          
           $response = array(
             'success' => $success,);
          echo json_encode($response);

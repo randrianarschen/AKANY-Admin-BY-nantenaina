@@ -200,50 +200,54 @@ function edit_row(event, no, tdLength)
  ;}
  var srcNew = document.getElementById("blah"+no).src;
 var fileArray = document.getElementById("img"+no).files;
-var img = fileArray[0] ; 
- data.append('image', img);
  arrVal.push(srcNew);
 if(fileArray.length > 0){
-  sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
-    console.log(response);
-    if(response.success === true) { 
-       var td =  document.getElementsByClassName("td"+no);
-      for(let j = 0; j<tdLength; j++){ 
-    if(j === tdLength-1){ 
-     console.log("im here eorzeoruizeurozeir oezurouezr");
-    td[j].innerHTML= "<img id='image"+no+"' src='"+arrVal[j]+"' width='100px' height='100px'>"
-    console.log(td[j]);
-  } 
-  else{
-     td[j].innerHTML=arrVal[j];
-     console.log(val[j]);
-  }
-} 
-   document.getElementById("edit_button"+no).style.display="block";
-    document.getElementById("save_button"+no).style.display="none";
-    document.getElementById("delete_button"+no).style.display="block";
-    } else
+  var img = fileArray[0] ; 
+ data.append('image', img);
+ console.log("there is data content");
+}
+   else
     {
+      var src =$("#blah"+no+"").attr('src'); //"images/banner/Penguins.jpg"
+      var tarr = src.split('/');      //["images","banner","Penguins.jpg"]
+      var file = tarr[tarr.length - 1]; //Penguins.jpg
+      data.append('image', file);
+      console.log(file);
     
-     alert(data.message);
     }
+    sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
+      console.log(response);
+      if(response.success === true) { 
+         var td =  document.getElementsByClassName("td"+no);
+        for(let j = 0; j<tdLength; j++)
+        { 
+             if(j === tdLength-1)
+             { 
+                  console.log("im here eorzeoruizeurozeir oezurouezr");
+                  td[j].innerHTML= "<img id='image"+no+"' src='"+arrVal[j]+"' width='100px' height='100px'>"
+                  console.log(td[j]);
+              } 
+           else
+           {
+                td[j].innerHTML=arrVal[j];
+                console.log(val[j]);
+           }
+      } 
+      document.getElementById("edit_button"+no).style.display="block";
+      document.getElementById("save_button"+no).style.display="none";
+      document.getElementById("delete_button"+no).style.display="block";
+      document.getElementById("cancel_button"+no).style.display="none";
+} 
+ else
+{
+  alert("error");
+} 
   
   }).catch(error=>{
      document.getElementById('error_msg').innerHTML ="<div class='alert alert-danger' role='alert'>"+error.message+"</div>";
   });
 
-} else{
-  Swal.fire({
-    title: 'desolé!',
-    text: 'Veuillez selectionner une image que vous voulez uploader',
-    imageUrl: 'https://unsplash.it/400/200',
-    imageWidth: 100,
-    imageHeight: 100,
-    imageAlt: 'Custom image',
-  });
-}
-}
-
+} 
 
 function delete_row(event, no, param)
 { 

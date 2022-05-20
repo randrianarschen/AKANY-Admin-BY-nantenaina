@@ -59,11 +59,21 @@ class Blog extends Controller
               $Model = $this->model;
               $modelMethod = 'updateOne';
               $domain = "Blogs";
-              $img = $_FILES['image']['name'];
+              if($_FILES['image']['name']) {
+              $img = $_FILES['image']['name'];   
               $ext = explode('.', $img);
               $file_ext = strtolower(end($ext));
               $image = rand(1, 1000000) . '.' . $file_ext;
               \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('object','contain_1', 'contain_2','image','id'));
+            } else {
+                $img =$_POST['image'];
+                $ext = explode('.', $img);
+                $file_ext = strtolower(end($ext));
+                $image = rand(1, 1000000) . '.' . $file_ext;
+                $this->model->updateOne(compact('object', 'contain_1', 'contain_2', 'image', 'id'));
+                $success = true;
+            }
+           
               $response = array(
                 'success' => $success,);
              echo json_encode($response);
