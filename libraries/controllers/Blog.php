@@ -59,7 +59,7 @@ class Blog extends Controller
               $Model = $this->model;
               $modelMethod = 'updateOne';
               $domain = "Blogs";
-              if($_FILES['image']['name']) {
+              if(!empty($_FILES['image']['name'])) {
               $img = $_FILES['image']['name'];   
               $ext = explode('.', $img);
               $file_ext = strtolower(end($ext));
