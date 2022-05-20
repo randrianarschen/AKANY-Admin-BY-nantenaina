@@ -54,8 +54,8 @@ class Events extends Controller
         $success = '';
          $id = $_POST['id'] ;
          $title_event = $_POST['val1'];
-         $datetime_event = $_POST['val2'];
-          $description_event = $_POST['val3'] ;
+         $datetime_event = $_POST['val3'];
+          $description_event = $_POST['val2'] ;
           $Model = $this->model;
           $modelMethod = 'updateOne';
           $domain = "events";
@@ -65,11 +65,7 @@ class Events extends Controller
           $image = rand(1, 1000000) . '.' . $file_ext;
           \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('title_event','datetime_event', 'description_event','image','id'));
           $response = array(
-            'success' => $success,
-            'error_msg' => $error_msg,
-            'title_event' => $title_event,
-             'image' => $image,
-            'id' => $id,);
+            'success' => $success,);
          echo json_encode($response);
            
 }

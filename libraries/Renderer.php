@@ -43,14 +43,8 @@ class Renderer
         ' . $error_message . '
        </div>';
         if ($error_mode == 'success') {
-            $error = '<script>
-            
-        swal({
-          title: "SUCCES",
-          icon: "success",
-          text:"' . $error_message . '",
-        });
-        </script>';
+            $error = '<script>swal({title: "SUCCES",icon: "success",text:"'. $error_message .'"});</script>';
+    
         }
         return $error;
     }

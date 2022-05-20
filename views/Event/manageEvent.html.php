@@ -9,8 +9,8 @@
                 <tr>
                     <th style="width: 10px">N°</th>
                     <th>Titre</th>
-                    <th>Date et heure</th>
                     <th >Description</th>
+                    <th>Date et heure</th>
                     <th>Image</th>
                     <th>Option</th>
                 </tr>
@@ -26,13 +26,13 @@
                         <td ><?= $i ?>.</td>
                         <input type="hidden" id="<?= 'id' . $i; ?>" value="<?= $event['id']; ?>" name="id">
                         <td  class="td<?=$i;?>"  id="<?= 'td1' . $i; ?>"> <?= $event['title_event']; ?></td>
-                        <td  class="td<?=$i;?>" id="<?= 'td2' . $i; ?>"><?= $event['datetime_event']; ?></td>
-                        <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><?= $event['description_event']; ?></td>
+                          <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><?= $event['description_event']; ?></td>
+                          <td  class="td<?=$i;?>" id="<?= 'td2' . $i; ?>"><?= $event['datetime_event']; ?></td>
                         <td  class="td<?=$i;?>" id="<?= 'td5' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Events/<?= $event['image']; ?>" alt="" width="100px" height="100px"></td>
                         <td>
                             <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>"  onclick="edit_row(event,'<?= $i; ?>', 4)"> <i class="fas fa-pencil-alt"></i></button>
-                            <!-- <button type="button" class="btn btn-secondary btn-sm" id="<?= 'cancel' . $i ?>" style="display:none" onclick="cancel(event, '<?= $i; ?>', 4)"><i class="fas fa-ban"></i></button> -->
-                            <button type="sumbit" id="<?= 'save_button' . $i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'events','updateRowEvent', 4);"><i class="fas fa-check"></i></button>
+                            <button type ="submit" class="btn btn-danger btn-sm" id="<?='cancel_button'.$i;?>" onclick="cancel(event, '<?=$i;?>', 'events','cancel', 4 );" style="display:none;"><i class="fa-solid fa-ban"></i></button>
+                            <button type="submit" id="<?= 'save_button' . $i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'events','updateRowEvent', 4);"><i class="fas fa-check"></i></button>
                             <button type="submit" class="btn btn-danger btn-sm" id="delete_button<?=$i;?>" onclick="delete_row(event, '<?= $i; ?>', 'events')"><i class="fas fa-trash"></i></button>
 
                         </td>

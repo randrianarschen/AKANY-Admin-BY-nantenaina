@@ -37,6 +37,11 @@ abstract class Controller {
                       $success = false;
                   }
                  echo json_encode(['success' => $success]);
-                 
-    }
+                  }
+                  public function cancel(){
+                      if(isset($_GET['id'] )&& !empty($_GET['id'])){
+                    $id = $_GET['id'];
+                    $response = $this->model->findOne($id);
+                    echo json_encode($response);
+                  }}
 }

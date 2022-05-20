@@ -86,7 +86,7 @@ var sendRequest = async (url, data) => {
     if(response.ok){
       console.log(response);
     }else{
-      console.log(response.statusText);
+      console.log("oops");
     }  
     return response;}
 var deleteData = async (url) => {
@@ -105,30 +105,56 @@ var abortDeleting = async () => {
   console.log('now aborting');
 }
 
-// function cancel(event, no, tdLength){
-//   event.preventDefault();
-//   document.getElementById("edit_button"+no).style.display="block";
-//   document.getElementById("delete_button"+no).style.display="block";
-//   document.getElementById("save_button"+no).style.display="none";
-//   document.getElementById("cancel"+no).style.display="none"; 
-//   var val =  document.getElementsByClassName("iden"+no);
-//  var td =  document.getElementsByClassName("td"+no);
-//  console.log(val);
-//   for(let g = 0; g< tdLength; g++){ 
+function cancel(event, no, par1, par2, tdLength){
+  event.preventDefault();
+  var id = document.getElementById("id"+no).value;
+  var data = new FormData();
+  data.append('id', id);
+  sendRequest("index.php?controller="+par1+"&task="+par2+" &id="+id+"", data).then(response =>{
+  document.getElementById("edit_button"+no).style.display="block";
+  document.getElementById("delete_button"+no).style.display="block";
+  document.getElementById("save_button"+no).style.display="none";
+  document.getElementById("cancel"+no).style.display="none"; 
+ var td =  document.getElementsByClassName("td"+no);
+ if(par1 == "witness"){
+  td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
+  td[tdLength - 2].innerHtml = response.link_video;
+  td[tdLength - 3].innerHTML= response.function;
+  td[tdLength - 4].innerHTML= response.date_publication;
+  td[tdLength - 5].innerHTML= response.title;
+  td[tdLength - 6].innerHTML= response.name_witness;
+  }
+  else if(par1 == "donation"){
+    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/donation/"+response.image+"' width='100px' height='100px'>"
+    td[tdLength - 2].innerHtml = response.montant;
+    td[tdLength - 3].innerHTML= response.cree_a;
+    td[tdLength - 4].innerHTML= response.date_motif;
+    td[tdLength - 5].innerHTML= response.sujet;
+   
+  }
+  else if(par1 == "blog"){
+    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/Blogs/"+response.image+"' width='100px' height='100px'>"
+    td[tdLength - 2].innerHtml = response.contain_2;
+    td[tdLength - 3].innerHTML= response.contain_1;
+    td[tdLength - 4].innerHTML= response.object;
+  }
+  else if(par1=="responsible"){
+    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
+    td[tdLength - 2].innerHtml = response.function;
+    td[tdLength - 3].innerHTML= response.firstname_resp;
+    td[tdLength - 4].innerHTML= response.name_resp;
   
-//  if( g === tdLength-1){ 
-//     var srcNew = document.getElementById("blah"+no).src;
-//   td[g].innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
-//    }
-//    else{
-//      let values =[]; 
-//     values[g]=val[g].value;
-//      td[g].innerHTML=values[g];
-//    }
-//   }
-    
+  }
+  else if(par1 == "events"){
+    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/Events/"+response.image+"' width='100px' height='100px'>"
+    td[tdLength - 2].innerHtml = response.datetime_event;
+    td[tdLength - 3].innerHTML= response.description_event;
+    td[tdLength - 4].innerHTML= response.title_event;
+  }
+});
+}
 
-// }
+
 
 function edit_row(event, no, tdLength)
 {
@@ -136,17 +162,18 @@ function edit_row(event, no, tdLength)
  document.getElementById("edit_button"+no).style.display="none";
  document.getElementById("save_button"+no).style.display="block";
  document.getElementById("delete_button"+no).style.display="none";
+ document.getElementById("cancel_button"+no).style.display="block";
   // document.getElementById("cancel"+no).style.display="block";
  var td= document.getElementsByClassName("td"+no); 
  var row = document.getElementById('row'+no); 
  for(let k = 0; k<tdLength; k++){
  let val;
  val = td[k].innerHTML;
- if(k == 1){
+ if(k == 2){
    td[k].innerHTML = "<input type='datetime' class='iden"+no+"' value='"+val+"'>";
  }else if(k=== tdLength-1){
   var src = document.getElementById("image"+no+"").src;
-   td[k].innerHTML = "<img id='blah"+no+"' style='display:block;' src='"+src+"'  width='100px' height='100px'><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Select image</span><input type='file' class='imgToEdit' name='image'  accept='.jpg, .jpeg, .gif, .png'    required id='img"+no+"' onchange='showPreview(event, "+no+");'></span></div>";
+   td[k].innerHTML = "<img id='blah"+no+"' style='display:block;' src='"+src+"'  width='100px' height='100px'><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Selectioner image</span><input type='file' class='imgToEdit' name='image'  accept='.jpg, .jpeg, .gif, .png'    required id='img"+no+"' onchange='showPreview(event, "+no+");'></span></div>";
  }
  else{
   td[k].innerHTML="<input type='text' class ='iden"+no+"' value='"+val+"'>";
@@ -162,40 +189,37 @@ function edit_row(event, no, tdLength)
   var id = document.getElementById("id"+no).value;
   var data = new FormData();
    data.append('id', id);
- var val=document.getElementsByClassName("iden"+no) ; 
+ var val = document.getElementsByClassName("iden"+no) ; 
  console.log(val);
-  for(let l = 0; l<tdLength-1; l++){ 
+  var arrVal = []; 
+  for(let l = 0; l<tdLength-1; l++){
+   arrVal.push(val[l].value);
    data.append('val'+(l+1), val[l].value);
  ;}
-
-  var fileArray = document.getElementById("img"+no).files;
-var img = fileArray[0] ;
-//  let data = {id:id, val1:value1, val2:value2, val3:value3, val4:value4, image:img};
+ var srcNew = document.getElementById("blah"+no).src;
+var fileArray = document.getElementById("img"+no).files;
+var img = fileArray[0] ; 
+ data.append('image', img);
+ arrVal.push(srcNew);
 if(fileArray.length > 0){
-  
-  data.append('image', img);
   sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
     console.log(response);
-  
-    if(response.success === true) {
-     
-      
-      var srcNew = document.getElementById("blah"+no).src;
-      var val =document.getElementsByClassName("iden"+no);
+    if(response.success === true) { 
        var td =  document.getElementsByClassName("td"+no);
-      for(let j = 0; j<tdLength; j++){
-     
-    console.log("im here eorzeoruizeurozeir oezurouezr");
-    if(j === tdLength-1){
-    td[j].innerHTML= "<img id='image"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
+      for(let j = 0; j<tdLength; j++){ 
+    if(j === tdLength-1){ 
+     console.log("im here eorzeoruizeurozeir oezurouezr");
+    td[j].innerHTML= "<img id='image"+no+"' src='"+arrVal[j]+"' width='100px' height='100px'>"
+    console.log(td[j]);
   } 
   else{
-     td[j].innerHTML=val[j].value;
+     td[j].innerHTML=arrVal[j];
      console.log(val[j]);
   }
 } 
    document.getElementById("edit_button"+no).style.display="block";
     document.getElementById("save_button"+no).style.display="none";
+    document.getElementById("delete_button"+no).style.display="block";
     } else
     {
     
@@ -203,7 +227,6 @@ if(fileArray.length > 0){
     }
   
   }).catch(error=>{
-    
      document.getElementById('error_msg').innerHTML ="<div class='alert alert-danger' role='alert'>"+error.message+"</div>";
   });
 

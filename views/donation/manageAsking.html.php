@@ -21,11 +21,11 @@
                     <?php echo"bon voyage";?>
                     <th style="width: 10px">N°</th>
                     <th>But</th>
+                    <th style="">Motif</th>
+                    <th style="">Date</th> 
                     <th>Montant</th>
-                    <th style="width: 40px">Motif</th>
-                    <th style="width: 40px">Date</th>
                     <th>Image</th>
-                    <th>Option</th>
+                    <th width="50px">Option</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,17 +38,16 @@
 
                     <tr id="<?= 'row' .$i; ?>">
                         <td><?= $i ?>.</td>
-                        <td id="<?= 'td1' .$i; ?>"><?= $donation['sujet']; ?></td>
-                        <td id="<?= 'td2' .$i; ?>"><?=$donation['montant'];?></td>
-                        <td id="<?= 'td3' .$i; ?>"><?=$donation['motif'];?></td>
-                         <td id="<?= 'td4' .$i; ?>"><?= $donation['cree_a'] ?></td>
-                        <td id="<?= 'td5' .$i; ?>"><img src="views/images/donation/<?=$donation['image'] ;?>" width="100" height="100"></td>
+                        <input type="hidden" name="id" id="<?='id'.$i;?>" value="<?= $donation['id']; ?>">
+                        <td class="<?= 'td' .$i; ?>"><?= $donation['sujet']; ?></td>
+                       <td class="<?= 'td' .$i; ?>"><?=$donation['motif'];?></td>  
+                        <td class="<?= 'td' .$i; ?>"><?= $donation['cree_a'] ?></td>
+                        <td class="<?= 'td' .$i; ?>"><?=$donation['montant'];?></td>
+                        <td class="<?= 'td' .$i; ?>"><img id = "<?='image'.$i;?>" src="views/images/donation/<?=$donation['image'] ;?>" width="100" height="100"></td>
                         <td>
-                        <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button'.$i; ?>"  class="edit" onclick="edit_row(event,'<?= $i; ?>')"> <i class="fas fa-pencil-alt"></i></button>
-                                       <button type="button" class="btn btn-secondary btn-sm" id="<?='cancel'.$i?>" style="display:none" onclick="cancel(event, '<?= $i; ?>')"><i class="fas fa-ban"></i></button>
-                                        <button type="sumbit" id="<?= 'save_button'.$i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'events','updateRowEvent');"><i class="fas fa-check"></i></button>
-                                        
-                                        <button type="submit"   class="btn btn-danger btn-sm" class="delete" onclick="delete_row(event, '<?=$i; ?>', 'events')"><i class="fas fa-trash"></i></button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>"  onclick="edit_row(event,'<?= $i; ?>', 5)"> <i class="fas fa-pencil-alt"></i></button>
+                            <button type="submit" id="<?= 'save_button' . $i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'donation','updateRowDonat', 5);"><i class="fas fa-check"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm" id="delete_button<?=$i;?>" onclick="delete_row(event, '<?= $i; ?>', 'donation')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 <?php } ?>

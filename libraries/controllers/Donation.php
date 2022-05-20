@@ -56,5 +56,31 @@ class Donation extends Controller
     $donations = $this->model->findAll();
     \Renderer::render('donation/manageAsking', compact('pageTitle', 'donations'));
   }
+  public function updateRowDonat(){
+   
+    $response = array();
+     
+        global $success;
+        global $error_msg;
+        $error_msg = 'bon ok';
+        $success = '';
+         $id = $_POST['id'] ;
+         $sujet = $_POST['val1'];
+         $motif = $_POST['val2'];
+          $cree_a = $_POST['val3'] ;
+          $montant = $_POST['val4'] ;
+          $Model = $this->model;
+          $modelMethod = 'updateOne';
+          $domain = "donation";
+          $img = $_FILES['image']['name'];
+          $ext = explode('.', $img);
+          $file_ext = strtolower(end($ext));
+          $image = rand(1, 1000000) . '.' . $file_ext;
+          \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('sujet','montant', 'motif','image', 'cree_a','id'));
+          $response = array(
+            'success' => $success,);
+         echo json_encode($response);
+           
+}
   
 }

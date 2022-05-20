@@ -40,6 +40,31 @@ public function manageResponsible(){
     $responsibles = $this->model->findAll();
     \renderer::render($this->view2, compact('pageTitle', 'responsibles', 'error_msg'));
 }
+public function updateRowResp(){
+   
+    $response = array();
+     
+        global $success;
+        global $error_msg;
+        $error_msg = 'bon ok';
+        $success = '';
+         $id = $_POST['id'] ;
+         $name_resp = $_POST['val1'];
+         $firstname_resp = $_POST['val2'];
+          $function = $_POST['val3'] ;
+          $Model = $this->model;
+          $modelMethod = 'updateOne';
+          $domain = "responsibles";
+          $img = $_FILES['image']['name'];
+          $ext = explode('.', $img);
+          $file_ext = strtolower(end($ext));
+          $image = rand(1, 1000000) . '.' . $file_ext;
+          \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('name_resp','firstname_resp', 'function', 'image','id'));
+          $response = array(
+            'success' => $success,);
+         echo json_encode($response);
+           
+}
 }
 
 ?>
