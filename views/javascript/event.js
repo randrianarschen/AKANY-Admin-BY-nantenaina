@@ -105,53 +105,56 @@ var abortDeleting = async () => {
   console.log('now aborting');
 }
 
-function cancel(event, no, par1, par2, tdLength){
+function cancel(event, no, par1, par2){
   event.preventDefault();
   var id = document.getElementById("id"+no).value;
   var data = new FormData();
   data.append('id', id);
-  sendRequest("index.php?controller="+par1+"&task="+par2+" &id="+id+"", data).then(response =>{
+  sendRequest("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
   document.getElementById("edit_button"+no).style.display="block";
   document.getElementById("delete_button"+no).style.display="block";
   document.getElementById("save_button"+no).style.display="none";
-  document.getElementById("cancel"+no).style.display="none"; 
- var td =  document.getElementsByClassName("td"+no);
+  document.getElementById("cancel_button"+no).style.display="none"; 
+var td = document.getElementsByClassName("td"+no);
+console.log(response);
+console.log(td);
  if(par1 == "witness"){
-  td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
-  td[tdLength - 2].innerHtml = response.link_video;
-  td[tdLength - 3].innerHTML= response.function;
-  td[tdLength - 4].innerHTML= response.date_publication;
-  td[tdLength - 5].innerHTML= response.title;
-  td[tdLength - 6].innerHTML= response.name_witness;
+  td[5].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
+  td[4].innerHTML = response.link_video;
+  td[3].innerHTML= response.function;
+  td[2].innerHTML= response.date_publication;
+  td[1].innerHTML= response.title;
+  td[0].innerHTML= response.name_witness;
   }
   else if(par1 == "donation"){
-    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/donation/"+response.image+"' width='100px' height='100px'>"
-    td[tdLength - 2].innerHtml = response.montant;
-    td[tdLength - 3].innerHTML= response.cree_a;
-    td[tdLength - 4].innerHTML= response.date_motif;
-    td[tdLength - 5].innerHTML= response.sujet;
+    td[4].innerHTML= "<img id='image"+no+"' src='views/images/donation/"+response.image+"' width='100px' height='100px'>"
+    td[3].innerHTML = response.montant;
+    td[2].innerHTML= response.cree_a;
+    td[1].innerHTML= response.date_motif;
+    td[0].innerHTML= response.sujet;
    
   }
   else if(par1 == "blog"){
-    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/Blogs/"+response.image+"' width='100px' height='100px'>"
-    td[tdLength - 2].innerHtml = response.contain_2;
-    td[tdLength - 3].innerHTML= response.contain_1;
-    td[tdLength - 4].innerHTML= response.object;
+    td[3].innerHTML= "<img id='image"+no+"' src='views/images/Blogs/"+response.image+"' width='100px' height='100px'>"
+    td[2].innerHTML = response.contain_2;
+    td[1].innerHTML= response.contain_1;
+    td[0].innerHTML= response.object;
   }
   else if(par1=="responsible"){
-    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
-    td[tdLength - 2].innerHtml = response.function;
-    td[tdLength - 3].innerHTML= response.firstname_resp;
-    td[tdLength - 4].innerHTML= response.name_resp;
+    td[1].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
+    td[2].innerHTML = response.function;
+    td[1].innerHTML= response.firstname_resp;
+    td[0].innerHTML= response.name_resp;
   
   }
-  else if(par1 == "events"){
-    td[tdLength - 1].innerHTML= "<img id='image"+no+"' src='views/images/Events/"+response.image+"' width='100px' height='100px'>"
-    td[tdLength - 2].innerHtml = response.datetime_event;
-    td[tdLength - 3].innerHTML= response.description_event;
-    td[tdLength - 4].innerHTML= response.title_event;
+  else{
+    td[3].innerHTML= "<img id='image"+no+"' src='views/images/Events/"+response.image+"' width='100px' height='100px'>"
+    td[2].innerHTML= response.datetime_event;
+    td[1].innerHTML= response.description_event;
+    td[0].innerHTML= response.title_event;
+    console.log(td[0]);
   }
-});
+}).catch(error => {alert(error);});
 }
 
 
@@ -163,7 +166,6 @@ function edit_row(event, no, tdLength)
  document.getElementById("save_button"+no).style.display="block";
  document.getElementById("delete_button"+no).style.display="none";
  document.getElementById("cancel_button"+no).style.display="block";
-  // document.getElementById("cancel"+no).style.display="block";
  var td= document.getElementsByClassName("td"+no); 
  var row = document.getElementById('row'+no); 
  for(let k = 0; k<tdLength; k++){

@@ -46,6 +46,7 @@
                         <td class="<?= 'td' .$i; ?>"><img id = "<?='image'.$i;?>" src="views/images/donation/<?=$donation['image'] ;?>" width="100" height="100"></td>
                         <td>
                             <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>"  onclick="edit_row(event,'<?= $i; ?>', 5)"> <i class="fas fa-pencil-alt"></i></button>
+                            <button type ="submit" class="btn btn-danger btn-sm" id="<?='cancel_button'.$i;?>" onclick="cancel(event, '<?=$i;?>', 'donation','anulate');" style="display:none;"><i class="fa-solid fa-ban"></i></button>
                             <button type="submit" id="<?= 'save_button' . $i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'donation','updateRowDonat', 5);"><i class="fas fa-check"></i></button>
                             <button type="submit" class="btn btn-danger btn-sm" id="delete_button<?=$i;?>" onclick="delete_row(event, '<?= $i; ?>', 'donation')"><i class="fas fa-trash"></i></button>
                         </td>

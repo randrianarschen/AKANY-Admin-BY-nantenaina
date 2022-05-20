@@ -1,7 +1,7 @@
 <?php
 
 namespace Controllers;
-
+require("libraries/autoload.php");
 class Events extends Controller
 {
   protected $modelName = \models\Events::class;
