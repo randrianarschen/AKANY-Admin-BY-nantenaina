@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <!-- Color Picker -->
-      <form method="POST" enctype="multipart/form-Data" action=" ">
+      <form method="POST" enctype="multipart/form-Data" action="">
         <div class="form-group">
           <label>Sujet</label>
           <input type="text" id="event_title" class="form-control my-colorpicker1 colorpicker-element" required <?= \renderer::resetValue($sujet); ?> data-colorpicker-id="1" data-original-title="" name="sujet">

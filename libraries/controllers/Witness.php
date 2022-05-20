@@ -17,7 +17,6 @@ class Witness extends Controller
     $title = "";
     $function = " ";
     $link_video = " ";
-
     if (isset($_POST['add_witness'])) {
       if (isset($_POST['name_witness']) && isset($_POST['title']) && isset($_POST['function']) && isset($_POST['link_video'])) {
         if (!empty($_POST['name_witness']) && !empty($_POST['title']) && !empty($_POST['function']) && !empty($_POST['link_video']) && !empty($_FILES['image']['name'])) {
@@ -52,4 +51,31 @@ class Witness extends Controller
     $witnesses = $this->model->findAll();
     \renderer::render($this->view2, compact('pageTitle', 'witnesses', 'error_msg'));
   }
+  public function updateRowWit(){
+   
+    $response = array();
+     
+        global $success;
+        global $error_msg;
+        $error_msg = 'bon ok';
+        $success = '';
+         $id = $_POST['id'] ;
+         $name_witness = $_POST['val1'];
+         $title = $_POST['val2'];
+          $date_publication = $_POST['val3'] ;
+          $function = $_POST['val4'] ;
+          $link_video = $_POST['val5'] ;
+          $Model = $this->model;
+          $modelMethod = 'updateOne';
+          $domain = "witnesses";
+          $img = $_FILES['image']['name'];
+          $ext = explode('.', $img);
+          $file_ext = strtolower(end($ext));
+          $image = rand(1, 1000000) . '.' . $file_ext;
+          \Database::verifyFile(compact('file_ext', 'image', 'domain', 'Model', 'modelMethod'),  compact('name_witness', 'title', 'function',  'link_video','image', 'date_publication', 'id'));
+          $response = array(
+            'success' => $success,);
+         echo json_encode($response);
+           
+}
 }

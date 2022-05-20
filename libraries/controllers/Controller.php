@@ -1,51 +1,49 @@
 <?php
+
 namespace Controllers;
 
-abstract class Controller {
+abstract class Controller
+{
     protected $model;
     protected $modelName;
     protected $view1;
     protected $view2;
     protected $pageTitle;
-    
 
-   public  function __construct()
+
+    public  function __construct()
     {
         $this->model = new $this->modelName();
-     
     }
     /**
      * index the page
      *
      * @return void
      */
-  
+
     public function index()
     {
         $pageTitle = $this->pageTitle;
         \Renderer::render($this->view2, compact('pageTitle'));
     }
-    public function update(){
-        if(isset($_GET['id']) && !empty($_GET['id'])){
+
+    public function delete(): void
+    {
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
             $id = $_GET['id'];
-             $this->model->update($id);
-         $success = 1;
+            $this->model->deleteOne($id);
+            $success = true;
+        } else {
+            $success = false;
         }
-        else{
-            $success = 0;
-        }
+        echo json_encode(['success' => $success]);
     }
-    public function delete(): void{
-                 if(isset($_GET['id'] )&& !empty($_GET['id'])){
-                    $id = $_GET['id'];
-                    $this->model->delete($id);
-                    $success ="1";
-                 }
-                 else
-                  {
-                      $success ="0";
-                  }
-                  json_encode($success);
-                 
+  public function anulate():void
+    {
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $response = $this->model->findOne($id);
+           echo json_encode($response);
+        }
     }
 }

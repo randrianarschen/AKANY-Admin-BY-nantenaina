@@ -1,171 +1,326 @@
 
-function edit_row(no)
+var page = window.location.href;
+page = page.substr((page.lastIndexOf('/') + 1));
+switch(page){
+  
+   case "index.php?controller=Home&task=index":
+       $('#home').addClass('active');
+       break;
+   case "index.php?controller=Events&task=addEvent":
+     $("#event").addClass("active");
+     $('#event1').addClass('active');
+     $('#link1').css('display', 'block');
+       break;
+   case "index.php?controller=Events&task=manageEvent":
+      $("#event").addClass("active");
+       $('#event2').addClass('active');
+       $('#link1').css('display','block');
+       break;
+     case "index.php?controller=donation&task=ask":
+       $("#gift").addClass('active');
+       $("#gift1").addClass('active');
+       $('#link2').css('display', 'block');
+       break;
+     case "index.php?controller=donation&task=manageAsking":
+       $("#gift").addClass('active');
+       $("#gift2").addClass('active');
+       $('#link2').css('display', 'block');
+       break;
+       case "index.php?controller=blog&task=addBlog":
+         $("#blog").addClass('active');
+         $("#blog1").addClass('active');
+         $('#link5').css('display','block');
+         break;
+         case "index.php?controller=blog&task=manageBlog":
+           $("#blog").addClass('active');
+           $("#blog2").addClass('active');
+           $('#link5').css('display', 'block');
+           break;
+           case "index.php?controller=responsible&task=addResponsible":
+             $("#responsible").addClass('active');
+             $("#responsible1").addClass('active');
+             $('#link3').css('display','block');
+             break;
+             case "index.php?controller=responsible&task=manageResponsible": 
+               $("#responsible").addClass('active');
+               $("#responsible2").addClass('active');
+               $('#link3').css('display','block');
+               break
+               case "index.php?controller=admin&task=general":
+                 $("#settings").addClass('active');
+                 $("#setting1").addClass('active');
+                 $('#link6').css('display', 'block');
+                 break;
+                 case "index.php?controller=contact&task=updateContact":
+                   $("#settings").addClass('active');
+                   $("#setting2").addClass('active');
+                   $('#link6').css('display','block');
+                   break;
+                   case "index.php?controller=witness&task=addWitness":
+                     $("#witness").addClass('active');
+                     $("#witness1").addClass('active');
+                     $('#link4').css('display','block');
+                     break;
+                     case "index.php?controller=witness&task=manageWitness":
+                       $("#witness").addClass('active');
+                       $("#witness2").addClass('active');
+                       $('#link4').css('display','block');
+                       break;
+                       case "index.php?controller=mailbox&task=index":
+                         $("#email").addClass('active');
+                         break;
+                         default: 
+                         $("#home").addClass('active');
+
+}
+
+var controller = new AbortController();
+  var signal = controller.signal;
+var sendRequest = async (url, data) => {
+ 
+  const request = await fetch(url, {method:'POST', body: data});
+   console.log(request);
+  
+      const response = await request.json();
+  
+    if(response.ok){
+      console.log(response);
+    }else{
+      console.log("oops");
+    }  
+    return response;}
+var deleteData = async (url) => {
+  var response = await fetch(url);
+  var result = await response.json();
+  if(result.ok) {
+    console.log( result);
+  }else{
+    console.log( result.statusText);
+  }
+  return result;
+}
+
+var abortDeleting = async () => {
+  controller.abort();
+  console.log('now aborting');
+}
+
+function cancel(event, no, par1, par2){
+  event.preventDefault();
+  var id = document.getElementById("id"+no).value;
+  var data = new FormData();
+  data.append('id', id);
+  sendRequest("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
+  document.getElementById("edit_button"+no).style.display="block";
+  document.getElementById("delete_button"+no).style.display="block";
+  document.getElementById("save_button"+no).style.display="none";
+  document.getElementById("cancel_button"+no).style.display="none"; 
+var td = document.getElementsByClassName("td"+no);
+console.log(response);
+console.log(td);
+ if(par1 == "witness"){
+  td[5].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
+  td[4].innerHTML = response.link_video;
+  td[3].innerHTML= response.function;
+  td[2].innerHTML= response.date_publication;
+  td[1].innerHTML= response.title;
+  td[0].innerHTML= response.name_witness;
+  }
+  else if(par1 == "donation"){
+    td[4].innerHTML= "<img id='image"+no+"' src='views/images/donation/"+response.image+"' width='100px' height='100px'>"
+    td[3].innerHTML = response.montant;
+    td[2].innerHTML= response.cree_a;
+    td[1].innerHTML= response.date_motif;
+    td[0].innerHTML= response.sujet;
+   
+  }
+  else if(par1 == "blog"){
+    td[3].innerHTML= "<img id='image"+no+"' src='views/images/Blogs/"+response.image+"' width='100px' height='100px'>"
+    td[2].innerHTML = response.contain_2;
+    td[1].innerHTML= response.contain_1;
+    td[0].innerHTML= response.object;
+  }
+  else if(par1=="responsible"){
+    td[1].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
+    td[2].innerHTML = response.function;
+    td[1].innerHTML= response.firstname_resp;
+    td[0].innerHTML= response.name_resp;
+  
+  }
+  else{
+    td[3].innerHTML= "<img id='image"+no+"' src='views/images/Events/"+response.image+"' width='100px' height='100px'>"
+    td[2].innerHTML= response.datetime_event;
+    td[1].innerHTML= response.description_event;
+    td[0].innerHTML= response.title_event;
+    console.log(td[0]);
+  }
+}).catch(error => {alert(error);});
+}
+
+
+
+function edit_row(event, no, tdLength)
 {
+  event.preventDefault();
  document.getElementById("edit_button"+no).style.display="none";
  document.getElementById("save_button"+no).style.display="block";
- var titleRow=document.getElementById("title_row"+no);
- var dateRow=document.getElementById("date_row"+no);
- var timeRow=document.getElementById("time_row"+no);
- var descRow=document.getElementById("desc_row"+no);
- var imgRow= document.getElementById('img_row'+no);
- var title=titleRow.innerHTML;
- var date=dateRow.innerHTML;
- var time=timeRow.innerHTML;
- var desc=descRow.innerHTML;
- var src = document.getElementById("event_img"+no+"").src;
- titleRow.innerHTML="<input type='text' id='edit_title"+no+"' value='"+title+"'>";
- dateRow.innerHTML="<input type='text' id='edit_date"+no+"' value='"+date+"'>";
- timeRow.innerHTML="<input type='time' id='edit_time"+no+"' value='"+time+"'>";
- descRow.innerHTML="<input type='text' id='edit_desc"+no+"' value='"+desc+"'>";
- imgRow.innerHTML = "<img id='blah' style='display:block;' src='"+src+"'  width='100px' height='100px' /><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Select image</span><input type='file' class='img'  id='blah"+no+"' onchange='showPreview(event);'></span></div>"
+ document.getElementById("delete_button"+no).style.display="none";
+ document.getElementById("cancel_button"+no).style.display="block";
+ var td= document.getElementsByClassName("td"+no); 
+ var row = document.getElementById('row'+no); 
+ for(let k = 0; k<tdLength; k++){
+ let val;
+ val = td[k].innerHTML;
+ if(k == 2){
+   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' value='"+val+"'>";
+ }else if(k=== tdLength-1){
+  var src = document.getElementById("image"+no+"").src;
+   td[k].innerHTML = "<img id='blah"+no+"' style='display:block;' src='"+src+"'  width='100px' height='100px'><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Selectioner image</span><input type='file' class='imgToEdit' name='image'  accept='.jpg, .jpeg, .gif, .png'    required id='img"+no+"' onchange='showPreview(event, "+no+");'></span></div>";
+ }
+ else{
+  td[k].innerHTML="<input type='text' class ='iden"+no+"' value='"+val+"'>";
+ }
+ }
  console.log('you can edit it');
+}
 
-}
-var sendRequest = async (endPoint) => {
-  const request = await fetch(endPoint);
-  const data = await request.json();
-  console.log(data);
-  return data;
-}
-function save_row(no, sendRequest)
-{
-  sendRequest("index.php?controller=events&task=update").then(data =>{ console.log(data);}).catch(err =>{console.log(err);});
- var titleNew=document.getElementById("edit_title"+no).value;
- var dateNew=document.getElementById("edit_date"+no).value;
- var timeNew=document.getElementById("edit_time"+no).value;
- var descNew=document.getElementById("edit_desc"+no).value;
- var srcNew = document.getElementById("blah").src;
- document.getElementById("title_row"+no).innerHTML=titleNew;
- document.getElementById("date_row"+no).innerHTML=dateNew;
- document.getElementById("time_row"+no).innerHTML=timeNew;
- document.getElementById("desc_row"+no).innerHTML=descNew;
- document.getElementById("img_row"+no).innerHTML= "<img id='event_img"+no+"' src='"+srcNew+"' width='100px' height='100px'>"
- document.getElementById("edit_button"+no).style.display="block";
- document.getElementById("save_button"+no).style.display="none";
+
+ function save_row(event, no, par1, par2, tdLength)
+{   
+  event.preventDefault();
+  var id = document.getElementById("id"+no).value;
+  var data = new FormData();
+   data.append('id', id);
+ var val = document.getElementsByClassName("iden"+no) ; 
+ console.log(val);
+  var arrVal = []; 
+  for(let l = 0; l<tdLength-1; l++){
+   arrVal.push(val[l].value);
+   data.append('val'+(l+1), val[l].value);
+ ;}
+ var srcNew = document.getElementById("blah"+no).src;
+var fileArray = document.getElementById("img"+no).files;
+var img = fileArray[0] ; 
+ data.append('image', img);
+ arrVal.push(srcNew);
+if(fileArray.length > 0){
+  sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
+    console.log(response);
+    if(response.success === true) { 
+       var td =  document.getElementsByClassName("td"+no);
+      for(let j = 0; j<tdLength; j++){ 
+    if(j === tdLength-1){ 
+     console.log("im here eorzeoruizeurozeir oezurouezr");
+    td[j].innerHTML= "<img id='image"+no+"' src='"+arrVal[j]+"' width='100px' height='100px'>"
+    console.log(td[j]);
+  } 
+  else{
+     td[j].innerHTML=arrVal[j];
+     console.log(val[j]);
+  }
 } 
-
-function delete_row(no)
-{
- document.getElementById("row"+no+"").outerHTML="";
-}                                            
- function showPreview(event){
-    if(event.target.files.length > 0){
+   document.getElementById("edit_button"+no).style.display="block";
+    document.getElementById("save_button"+no).style.display="none";
+    document.getElementById("delete_button"+no).style.display="block";
+    } else
+    {
     
+     alert(data.message);
+    }
+  
+  }).catch(error=>{
+     document.getElementById('error_msg').innerHTML ="<div class='alert alert-danger' role='alert'>"+error.message+"</div>";
+  });
+
+} else{
+  Swal.fire({
+    title: 'desolé!',
+    text: 'Veuillez selectionner une image que vous voulez uploader',
+    imageUrl: 'https://unsplash.it/400/200',
+    imageWidth: 100,
+    imageHeight: 100,
+    imageAlt: 'Custom image',
+  });
+}
+}
+
+
+function delete_row(event, no, param)
+{ 
+   event.preventDefault();
+  Swal.fire({
+    title: "Etes vous prêt de l' effacer?",
+    text: "Vous ne pourriez pas le récupérer!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Oui, efface le!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      var id = document.getElementById("id"+no).value;
+      var data = new FormData();
+      data.append('id', id);
+      deleteData("index.php?controller="+param+"&task=delete&id="+id+"").then(response =>{
+        if(response.success === true) {
+          document.getElementById("row"+no).remove(); 
+          Swal.fire(
+        'effacé!',
+        'Les données sont supprimés.',
+        'success'
+      )}
+     else{
+      alert(response.message);
+     }
+    }
+     ).catch(error=>{console.log(error.message);});
+     
+    }
+  })
+}   
+                                   
+ function showPreview(event, no) {
+    if(event.target.files.length > 0){
       var file = event.target.files[0];
       var fileName =file.name;
+      var fileExt =fileName.split('.').pop();
+      var fileActExt = fileExt.toLowerCase();
+      var allowedFileExtensions = ['jpg','jpeg','png', 'gif'];
+      if(allowedFileExtensions.indexOf(fileActExt) != -1){
       var src = URL.createObjectURL(file);
-      var preview =document.getElementById("blah");
+      if(no == undefined) {
+      console.log(no);
+      var preview = document.getElementById("blah");
+        preview.src = src;
+        preview.style.display = "block";
+        var change = $('#selectImg');
+        change.innerHTML = "change";}
+      else{
+      var preview = document.getElementById("blah"+no);
+      console.log(preview);
       preview.src = src;
       preview.style.display = "block";
       var change = $('#selectImg');
-      change.innerHTML = "change";
+      change.innerHTML = "change";  
+      }}
+      else{
      
-    }
-  }
-//   fetch()=var sendRequest = (endPoint)=>{
-//     return new Promise((resolve, reject)=>{ 
-//       const request = new XMLHttpRequest();
-//   request.addEventListener(readystatechange, ()=>{
-//     if(request.readyState === 4 && request.status === 200){
-//       const data = JSON.parse(request.responseText);
-//       console.log(data);
-//       resolve(data);
-//     }
-//     else
-//     {
-//       console.log("error");
-//       reject(Error("error"));
-//     }
-//   })
-//   request.open('GET', endPoint, true);
-//   request.send();
-// }
-//     )
- 
-// }
-// sendRequest('http://localhost:3000/events').then(data =>{ console.log(data);}).catch(err =>{console.log(err);});
+        swal.fire("Désole! seul les format jpg, jpeg, png et gif sont autorisés");  
+         event.target.value = "";
+      }
+  }}
+
+var img = document.getElementById('blah');
+console.log(img);
 
 var navlink = document.getElementsByClassName('nav-link');
-for( let i = 0; i<navlink.length; i++ ){
-   navlink[i].addEventListener('click', function(){
+for( let j = 0; j<navlink.length; j++ ){
+   navlink[j].addEventListener('click', function(){
      $(this).addClass('active');
     });
   }
-  var page = window.location.href;
- page = page.substr((page.lastIndexOf('/') + 1));
-switch(page){
-   
-    case "index.php?controller=Home&task=index":
-        $('#home').addClass('active');
-        break;
-    case "index.php?controller=Events&task=addEvent":
-      $("#event").addClass("active");
-      $('#event1').addClass('active');
-      $('#link1').css('display', 'block');
-        break;
-    case "index.php?controller=Events&task=index":
-       $("#event").addClass("active");
-        $('#event2').addClass('active');
-        $('#link1').css('display','block');
-        break;
-      case "index.php?controller=donation&task=ask":
-        $("#gift").addClass('active');
-        $("#gift1").addClass('active');
-        $('#link2').css('display', 'block');
-        break;
-      case "index.php?controller=donation&task=index":
-        $("#gift").addClass('active');
-        $("#gift2").addClass('active');
-        $('#link2').css('display', 'block');
-        break;
-        case "index.php?controller=blog&task=addBlog":
-          $("#blog").addClass('active');
-          $("#blog1").addClass('active');
-          $('#link5').css('display','block');
-          break;
-          case "index.php?controller=blog&task=manageBlog":
-            $("#blog").addClass('active');
-            $("#blog2").addClass('active');
-            $('#link5').css('display', 'block');
-            break;
-            case "index.php?controller=responsible&task=addResponsible":
-              $("#responsible").addClass('active');
-              $("#responsible1").addClass('active');
-              $('#link3').css('display','block');
-              break;
-              case "index.php?controller=responsible&task=manageResponsible": 
-                $("#responsible").addClass('active');
-                $("#responsible2").addClass('active');
-                $('#link3').css('display','block');
-                break
-                case "index.php?controller=admin&task=general":
-                  $("#settings").addClass('active');
-                  $("#setting1").addClass('active');
-                  $('#link6').css('display', 'block');
-                  break;
-                  case "index.php?controller=contact&task=index":
-                    $("#settings").addClass('active');
-                    $("#setting2").addClass('active');
-                    $('#link6').css('display','block');
-                    break;
-                    case "index.php?controller=witness&task=addWitness":
-                      $("#witness").addClass('active');
-                      $("#witness1").addClass('active');
-                      $('#link4').css('display','block');
-                      break;
-                      case "index.php?controller=witness&task=manageWitness":
-                        $("#witness").addClass('active');
-                        $("#witness2").addClass('active');
-                        $('#link4').css('display','block');
-                        break;
-                        case "index.php?controller=mailbox&task=index":
-                          $("#email").addClass('active');
-                          break;
-                          default: 
-                          $("#home").addClass('active');
-
-}
-for(var i = 0; i<3; i++){
+ 
+for(let i = 0; i<3; i++){
 document.getElementById('spanEye')[i].addEventListener('click', 
 function () {
   var x = document.getElementById("password"+i);

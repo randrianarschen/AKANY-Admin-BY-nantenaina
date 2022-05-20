@@ -1,66 +1,51 @@
-<div class="card-body">
+<div class="card">
     <p id="error_msg"> <?= $error_msg; ?></p>
-    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-        <div class="row">
-            <div class="col-sm-12 col-md-6"></div>
-            <div class="col-sm-12 col-md-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="wrapper">
-                    <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Function</th>
-                            <th>Image</th>
-                            <th>Action</th>
-                            
-                        </tr>
-                        <?php
-                        $i = 0;
-                        foreach ($responsibles as $responsible) {
-                            $i++;
+    <div class="card-header">
+        <h3 class="card-title">Toutes les responsables</h3>
+<!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 10px">N°</th>
+                    <th>Nom</th>
+                    <th >Prénom</th>
+                    <th>fonction</th>
+                    <th>Image</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $i = 0;
+                foreach ($responsibles as $responsible) {
+                    $i++;
+                    ?>
+                    <tr id="<?= 'row' . $i; ?>">
+                        <td ><?= $i ?>.</td>
+                        <input type="hidden" id="<?= 'id' . $i; ?>" value="<?= $responsible['id']; ?>" name="id">
+                        <td  class="td<?=$i;?>"  id="<?= 'td1' . $i; ?>"> <?= $responsible['name_resp']; ?></td>
+                          <td  class="td<?=$i;?>" id="<?= 'td2' . $i; ?>"><?= $responsible['firstname_resp']; ?></td>
+                          <td  class="td<?=$i;?>" id="<?= 'td3' . $i; ?>"><?= $responsible['function']; ?></td>
+                        <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Responsibles/<?= $responsible['image']; ?>" alt="" width="100px" height="100px"></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>"  onclick="edit_row(event,'<?= $i; ?>', 4)"> <i class="fas fa-pencil-alt"></i></button>
+                            <button type ="submit" class="btn btn-danger btn-sm" id="<?='cancel_button'.$i;?>" onclick="cancel(event, '<?=$i;?>', 'responsible','anulate');" style="display:none;"><i class="fa-solid fa-ban"></i></button>
+                            <button type="submit" id="<?= 'save_button' . $i; ?>" class="btn btn-success btn-sm" class="save" style="display:none;" onclick="save_row(event, '<?= $i; ?>', 'Responsible','updateRowResp', 4);"><i class="fas fa-check"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm" id="delete_button<?=$i;?>" onclick="delete_row(event, '<?= $i; ?>', 'Responsible')"><i class="fas fa-trash"></i></button>
 
-                        ?>
-                            <tr id="<?= 'row' . $i; ?>">
-                            <form>
-                                <td id="<?= 'title_row' . $i; ?>"><?= $responsible['name_resp']; ?></td>
-                                <td id="<?= 'date_row' . $i; ?>"><?= $responsible['firstname_resp']; ?></td>
-                                <td id="<?= 'time_row' . $i; ?>"><?= $responsible['function']; ?></td>
-                                <td id="img_row<?= $i; ?>"><img id="<?= 'event_img' . $i; ?>" src="./views/images/responsibles/<?= $responsible['image']; ?>" alt="" width="100px" height="100px"></td>
-                                <td>
-                                    <input type="button" id="<?= 'edit_button' . $i; ?>" value="Edit" class="edit" onclick="edit_row('<?= $i; ?>')">
-                                    <input type="button" id="<?= 'save_button' . $i; ?>" value="Save" class="save" style="display:none;" onclick="save_row('<?= $i; ?>')">
-                                    <input type="button" value="Delete" class="delete" onclick="delete_row('<?= $i; ?>')">
-                                </td>
-                        </form>
-                            </tr>
-                        <?php
-                        } ?>
-                        <br>
-                        <tr>
-                         <!-- <form id="add_form" enctype="multipart/form-data" method="POST">
-                            <td><input type="text" id="new_title"></td>
-                            <td><input type="date" id="new_date"></td>
-                            <td><input type="time" id="new_time"></td>
-                            <td><input type="text" id="new_desc"></td>
-                            <td>
-                                <img id="blah" style="display:none;" src="" alt="your image" width="100px" height="100px" />
-                                <div>
-                                    <span class="btn btn-file btn-success"><span class="fileupload-new">Select image</span><input type="file" class="img" id="imgInp" onchange="showPreview(event);"></span>
-                                </div>
-                            </td>
-                            <td><input type="button" class="add" onclick="add_row();" value="Add Row"><a href="index.php?controller=events&task=addEvent">add</a></td>
-                    </form> -->
-                        </tr>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
+                        </td>
+                    </tr>
+                <?php
+                } ?>
+            </tbody>
+        </table>
+       
+    </div> 
+    
+</div>
+<div class="row">
+            <div class="col-sm-12 col-md-4">
                 <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
             </div>
             <div class="col-sm-12 col-md-7">
@@ -78,5 +63,3 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
