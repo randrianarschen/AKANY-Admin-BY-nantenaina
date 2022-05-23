@@ -76,7 +76,7 @@ switch(page){
 
 var controller = new AbortController();
   var signal = controller.signal;
-var sendRequest = async (url, data) => {
+var uploadData = async (url, data) => {
  
   const request = await fetch(url, {method:'POST', body: data});
    console.log(request);
@@ -89,7 +89,7 @@ var sendRequest = async (url, data) => {
       console.log("oops");
     }  
     return response;}
-var deleteData = async (url) => {
+var sendRef = async (url) => {
   var response = await fetch(url);
   var result = await response.json();
   if(result.ok) {
@@ -110,13 +110,13 @@ function cancel(event, no, par1, par2){
   var id = document.getElementById("id"+no).value;
   var data = new FormData();
   data.append('id', id);
-  sendRequest("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
+  uploadData("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
   document.getElementById("edit_button"+no).style.display="block";
   document.getElementById("delete_button"+no).style.display="block";
   document.getElementById("save_button"+no).style.display="none";
   document.getElementById("cancel_button"+no).style.display="none"; 
 var td = document.getElementsByClassName("td"+no);
-console.log(response);
+console.log(Object.values(response));
 console.log(td);
  if(par1 == "witness"){
   td[5].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
@@ -130,7 +130,7 @@ console.log(td);
     td[4].innerHTML= "<img id='image"+no+"' src='views/images/donation/"+response.image+"' width='100px' height='100px'>"
     td[3].innerHTML = response.montant;
     td[2].innerHTML= response.cree_a;
-    td[1].innerHTML= response.date_motif;
+    td[1].innerHTML= response.motif;
     td[0].innerHTML= response.sujet;
    
   }
@@ -215,7 +215,7 @@ if(fileArray.length > 0){
       console.log(file);
     
     }
-    sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
+    uploadData("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
       console.log(response);
       if(response.success === true) { 
          var td =  document.getElementsByClassName("td"+no);
@@ -342,3 +342,55 @@ function () {
   }
 }
 )}
+function searchAny(controller, tdLength){
+
+  var search = $('#search').val();
+  var url = "index.php?controller="+controller+"&task=searchAny&search="+search+"";
+  sendRef(url).then(response =>{
+    if(response.lenght > 0){
+      var tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
+      var data = Object.values(response);
+      console.log(data);
+      var resp_length = response.length;
+      for(let i = 0; i<resp_length; i++){ 
+        var tr = document.createElement("tr");
+        tr.setAttribute("id", "row"+l);
+        tr.setAttribute("class", "tr"+l);
+        tbody.appendChild(tr);
+        var td = document.createElement("td");
+        td.innerHTML = i+1;
+        tr.appendChild(td);
+        var input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        var v = i + 1;
+        input.setAttribute("id", "id"+v);
+        input.setAttribute("value", data[i]['id']);
+        input.setAttribute("name", "id");
+        tr.appendChild(input);
+        for( let l = 1; l<(tdLength+1); l++){
+        if(l === tdLength){
+        var td = document.createElement("td");
+        td.innerHTML =" <button type='submit' class='btn btn-primary btn-sm' id='edit_button"+v+"'  onclick='edit_row(event,"+v+", tdLength)'> <i class='fas fa-pencil-alt'></i></button><button type ='submit' class='btn btn-danger btn-sm' id='cancel_button"+v+"' onclick='cancel(event, '"+v+"', '"+controller+"','anulate');' style='display:none;''><i class='fa-solid fa-ban'></i></button><button type='submit' id= 'save_button"+v+"' class='btn btn-success btn-sm' class='save' style='display:none;' onclick='save_row(event, '"+v+"', '"+controller+"','updateRowResp', tdLength);'><i class='fas fa-check'></i></button><button type='submit' class='btn btn-danger btn-sm' id='delete_button"+v+"' onclick='delete_row(event, '"+v+"', '"+controller+"')'><i class='fas fa-trash'></i></button>"
+        tr.appendChild(td);
+        }
+        else if(l === tdLength - 1 ){
+        var td = document.createElement("td");
+        td.setAttribute("class", "td"+l);
+        td.innerHTML = "<img id='blah"+i+"' src='views/images/"+controller+"/"+data[i][l]+"'>";
+        tr.appendChild(td);
+        }
+        else{
+          var td = document.createElement("td");
+          td.setAttribute("class", "td"+l);
+          td.innerHTML = data[i][l];
+        }
+        tr.apprendChild(td);
+  }}
+    }else{
+      var table = document.getElementsByTagName('table');
+      table.innerHTML="<h1 style='padding:80px;'><center>Aucun résultat</center></h1>";
+    }}
+  ).catch(error =>{alert(error.message);});
+  
+}

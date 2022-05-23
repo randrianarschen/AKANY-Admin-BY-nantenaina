@@ -1,4 +1,16 @@
 <div class="card">
+<div class="col-md-8 offset-md-2">
+                    <form action="simple-results.html">
+                        <div class="input-group">
+                            <input type="search" id="search" onKeyup="searchAny('donation', 5);" class="form-control form-control-lg" placeholder="Type your keywords here">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-lg btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+            </form>
+    </div>
     <div class="card-header">
         <h3 class="card-title">Toutes les demandes</h3>
 
@@ -28,7 +40,7 @@
                     <th width="50px">Option</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tdbody">
                 
                 <?php
                 $i = 0;

@@ -470,8 +470,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     })
   </script>
   <script src="https://kit.fontawesome.com/9979a01860.js" crossorigin="anonymous"></script>
-  <script src="./views/javascript/event.js"></script>
+  <script src="./views/javascript/jsNeeded1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+  
 </body>
 
 </html>

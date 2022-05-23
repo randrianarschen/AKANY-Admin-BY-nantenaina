@@ -1,5 +1,18 @@
 <div class="card">
-    <p id="error_msg"> <?= $error_msg; ?></p>
+  
+    <div class="col-md-8 offset-md-2">
+                    <form action="simple-results.html">
+                        <div class="input-group">
+                            <input type="search" id="search" onKeyup="searchAny('events', 4);"class="form-control form-control-lg" placeholder="Type your keywords here">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-lg btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+            </form>
+    </div>
+      <p id="error_msg"> <?= $error_msg; ?></p>
     <div class="card-header">
         <h3 class="card-title">Toutes les évènements</h3>
 <!-- /.card-header -->
@@ -15,7 +28,7 @@
                     <th>Option</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
                 <?php
                 $i = 0;
                 foreach ($events as $event) {
@@ -28,7 +41,7 @@
                         <td  class="td<?=$i;?>"  id="<?= 'td1' . $i; ?>"> <?= $event['title_event']; ?></td>
                           <td  class="td<?=$i;?>" id="<?= 'td4' . $i; ?>"><?= $event['description_event']; ?></td>
                           <td  class="td<?=$i;?>" id="<?= 'td2' . $i; ?>"><?= $event['datetime_event']; ?></td>
-                        <td  class="td<?=$i;?>" id="<?= 'td5' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Events/<?= $event['image']; ?>" alt="" width="100px" height="100px"></td>
+                        <td  class="td<?=$i;?>" id="<?= 'td5' . $i; ?>"><img id="<?= 'image' . $i; ?>" src="./views/images/Event/<?= $event['image']; ?>" alt="" width="100px" height="100px"></td>
                         <td>
                             <button type="submit" class="btn btn-primary btn-sm" id="<?= 'edit_button' . $i; ?>"  onclick="edit_row(event,'<?= $i; ?>', 4)"> <i class="fas fa-pencil-alt"></i></button>
                             <button type ="submit" class="btn btn-danger btn-sm" id="<?='cancel_button'.$i;?>" onclick="cancel(event, '<?=$i;?>', 'Events','anulate');" style="display:none;"><i class="fa-solid fa-ban"></i></button>
