@@ -43,7 +43,7 @@ class Model
     $insert->execute($td);
   }
   public function search($keywords){
-    $search = $this->pdo->query("SELECT * FROM {$this->table} WHERE $this->col LIKE '%$keywords%'");
+    $search = $this->pdo->query("SELECT * FROM {$this->table} WHERE $this->col LIKE '%$keywords%' ORDER BY id DESC");
     $results = $search->fetchAll();
     return $results;
   }

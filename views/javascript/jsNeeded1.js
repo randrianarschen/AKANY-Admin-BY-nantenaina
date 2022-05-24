@@ -342,55 +342,85 @@ function () {
   }
 }
 )}
-function searchAny(controller, tdLength){
+function searchAny(){
+  var input, filter, table, tr, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementsByClassName("table");
+  tr = document.getElementsByTagName("tr");
 
-  var search = $('#search').val();
-  var url = "index.php?controller="+controller+"&task=searchAny&search="+search+"";
-  sendRef(url).then(response =>{
-    if(response.lenght > 0){
-      var tbody = document.getElementById("tbody");
-      tbody.innerHTML = "";
-      var data = Object.values(response);
-      console.log(data);
-      var resp_length = response.length;
-      for(let i = 0; i<resp_length; i++){ 
-        var tr = document.createElement("tr");
-        tr.setAttribute("id", "row"+l);
-        tr.setAttribute("class", "tr"+l);
-        tbody.appendChild(tr);
-        var td = document.createElement("td");
-        td.innerHTML = i+1;
-        tr.appendChild(td);
-        var input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        var v = i + 1;
-        input.setAttribute("id", "id"+v);
-        input.setAttribute("value", data[i]['id']);
-        input.setAttribute("name", "id");
-        tr.appendChild(input);
-        for( let l = 1; l<(tdLength+1); l++){
-        if(l === tdLength){
-        var td = document.createElement("td");
-        td.innerHTML =" <button type='submit' class='btn btn-primary btn-sm' id='edit_button"+v+"'  onclick='edit_row(event,"+v+", tdLength)'> <i class='fas fa-pencil-alt'></i></button><button type ='submit' class='btn btn-danger btn-sm' id='cancel_button"+v+"' onclick='cancel(event, '"+v+"', '"+controller+"','anulate');' style='display:none;''><i class='fa-solid fa-ban'></i></button><button type='submit' id= 'save_button"+v+"' class='btn btn-success btn-sm' class='save' style='display:none;' onclick='save_row(event, '"+v+"', '"+controller+"','updateRowResp', tdLength);'><i class='fas fa-check'></i></button><button type='submit' class='btn btn-danger btn-sm' id='delete_button"+v+"' onclick='delete_row(event, '"+v+"', '"+controller+"')'><i class='fas fa-trash'></i></button>"
-        tr.appendChild(td);
-        }
-        else if(l === tdLength - 1 ){
-        var td = document.createElement("td");
-        td.setAttribute("class", "td"+l);
-        td.innerHTML = "<img id='blah"+i+"' src='views/images/"+controller+"/"+data[i][l]+"'>";
-        tr.appendChild(td);
-        }
-        else{
-          var td = document.createElement("td");
-          td.setAttribute("class", "td"+l);
-          td.innerHTML = data[i][l];
-        }
-        tr.apprendChild(td);
-  }}
-    }else{
-      var table = document.getElementsByTagName('table');
-      table.innerHTML="<h1 style='padding:80px;'><center>Aucun résultat</center></h1>";
-    }}
-  ).catch(error =>{alert(error.message);});
-  
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 1; i < tr.length; i++) {
+  var td = [];  
+  tr[i].style.display = "none";
+   for( var j = 0; j< 6 ; j++){
+    td[j] = tr[i].getElementsByTagName("td")[j];
+    if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+
+      // show the row
+      tr[i].style.display = "";
+
+      // skip to the next row
+      continue;
+
+    }
+  }
 }
+}
+// function searchAny(controller, tdLength){
+
+//   var search = $('#search').val();
+//   var url = "index.php?controller="+controller+"&task=searchAny&search="+search+"";
+//   sendRef(url).then(response =>{
+//     if(response.length > 0){
+//       console.log(response);
+//       var tbody = document.getElementsByTagName("tbody");
+//       tbody.innerHTML = "";
+//       var resp_length = response.length;
+//       for(let i = 0; i<resp_length; i++){ 
+//        var data = Object.values(response[i]);
+//        console.log(data);
+//         var tr = document.createElement("tr");
+//         tr.setAttribute("id", "row"+l);
+//         tr.setAttribute("class", "tr"+l);
+//         tbody.appendChild(tr);
+//         var td = document.createElement("td");
+//         td.innerHTML = i+1;
+//         tr.appendChild(td);
+//         var input = document.createElement("input");
+//         input.setAttribute("type", "hidden");
+//         var v = i + 1;
+//         input.setAttribute("id", "id"+v);
+//         input.setAttribute("value", data[0]);
+//         alert(data[0]);
+//         input.setAttribute("name", "id");
+//         tr.appendChild(input);
+//         var tdLength1 = tdLength + 1;
+//         for( let l = 1; l<=tdLength1; l++){
+//           console.log(l);
+//         if(l === tdLength1){
+//         var td = document.createElement("td");
+//         td.innerHTML =" <button type='submit' class='btn btn-primary btn-sm' id='edit_button"+v+"'  onclick='edit_row(event,"+v+", tdLength)'> <i class='fas fa-pencil-alt'></i></button><button type ='submit' class='btn btn-danger btn-sm' id='cancel_button"+v+"' onclick='cancel(event, '"+v+"', '"+controller+"','anulate');' style='display:none;''><i class='fa-solid fa-ban'></i></button><button type='submit' id= 'save_button"+v+"' class='btn btn-success btn-sm' class='save' style='display:none;' onclick='save_row(event, '"+v+"', '"+controller+"','updateRowResp', tdLength);'><i class='fas fa-check'></i></button><button type='submit' class='btn btn-danger btn-sm' id='delete_button"+v+"' onclick='delete_row(event, '"+v+"', '"+controller+"')'><i class='fas fa-trash'></i></button>"
+//         tr.appendChild(td);
+//         }
+//         else if(l === tdLength1 - 1){
+//         var td = document.createElement("td");
+//         td.setAttribute("class", "td"+l);
+//         td.innerHTML = "<img id='blah"+v+"' src='views/images/"+controller+"/"+data[l]+"'>";
+//         tr.appendChild(td);
+//         }
+//         else{
+//           var td = document.createElement("td");
+//           td.setAttribute("class", "td"+l);
+//           td.innerHTML = data[l];
+//         }
+//         tr.apprendChild(td);
+//   } table.appendChild(tr);}
+ 
+//     }else{
+//       var table = document.getElementsByTagName('table');
+//       table.innerHTML="<h1 style='padding:80px;'><center>Aucun résultat</center></h1>";
+//     }}
+//   ).catch(error =>{console.log(error.message);});
+  
+// }

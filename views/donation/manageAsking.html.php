@@ -2,7 +2,7 @@
 <div class="col-md-8 offset-md-2">
                     <form action="simple-results.html">
                         <div class="input-group">
-                            <input type="search" id="search" onKeyup="searchAny('donation', 5);" class="form-control form-control-lg" placeholder="Type your keywords here">
+                            <input type="search" id="search" onKeyup="searchAny();" class="form-control form-control-lg" placeholder="Entrez votre mot clé">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-lg btn-default">
                                     <i class="fa fa-search"></i>

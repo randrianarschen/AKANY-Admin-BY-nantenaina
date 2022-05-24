@@ -46,11 +46,11 @@ abstract class Controller
            echo json_encode($response);
         }
     }
-    public function searchAny():void{
+  public function searchAny():void{
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $keywords = $_GET['search'];
             $response = $this->model->search($keywords);
-            echo json_encode($response);
-        }
-    }
+             echo json_encode($response);     
+}
+}
 }
