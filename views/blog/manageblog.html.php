@@ -1,17 +1,24 @@
 <div class="card">
     <p id="error_msg"> <?= $error_msg; ?></p>
-    <div class="col-md-8 offset-md-2">
-                    <form action="simple-results.html">
-                        <div class="input-group">
-                            <input type="search" id="search" onKeyup="searchAny('blog', 4);" class="form-control form-control-lg" placeholder="Entrez votre mot clé">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-lg btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-            </form>
-    </div>
+    <div class="row mt-5 mb-3 align-items-center">
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                <div class="col-md-3">
+                  <input type="text" class="form-control" placeholder="Entrez votre mot clé" id="search" pwa2-uuid="EDITOR/input-A38-D17-324F7-BCF" pwa-fake-editor="" spellcheck="false" data-ms-editor="true" onkeyup="searchAny();">
+                </div>
+                <div class="col-md-2 text-right">
+                  <span class="pr-3">Rows Per Page:</span>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="d-flex justify-content-end">
+                        <select class="custom-select" name="rowsPerPage" id="changeRows">
+                            <option value="1">1</option>
+                            <option value="5" selected="">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
     <div class="card-header">
         <h3 class="card-title">Toutes les blog</h3>
 <!-- /.card-header -->

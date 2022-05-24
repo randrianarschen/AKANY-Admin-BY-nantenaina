@@ -172,13 +172,13 @@ function edit_row(event, no, tdLength)
  let val;
  val = td[k].innerHTML;
  if(k == 2){
-   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' value='"+val+"'>";
+   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' width='130' value='"+val+"'>";
  }else if(k=== tdLength-1){
   var src = document.getElementById("image"+no+"").src;
    td[k].innerHTML = "<img id='blah"+no+"' style='display:block;' src='"+src+"'  width='100px' height='100px'><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Selectioner image</span><input type='file' class='imgToEdit' name='image'  accept='.jpg, .jpeg, .gif, .png'    required id='img"+no+"' onchange='showPreview(event, "+no+");'></span></div>";
  }
  else{
-  td[k].innerHTML="<input type='text' class ='iden"+no+"' value='"+val+"'>";
+  td[k].innerHTML="<input  type='text' class ='iden"+no+"' width='130' value='"+val+"'>";
  }
  }
  console.log('you can edit it');
@@ -365,62 +365,6 @@ function searchAny(){
 
     }
   }
-}
-}
-// function searchAny(controller, tdLength){
-
-//   var search = $('#search').val();
-//   var url = "index.php?controller="+controller+"&task=searchAny&search="+search+"";
-//   sendRef(url).then(response =>{
-//     if(response.length > 0){
-//       console.log(response);
-//       var tbody = document.getElementsByTagName("tbody");
-//       tbody.innerHTML = "";
-//       var resp_length = response.length;
-//       for(let i = 0; i<resp_length; i++){ 
-//        var data = Object.values(response[i]);
-//        console.log(data);
-//         var tr = document.createElement("tr");
-//         tr.setAttribute("id", "row"+l);
-//         tr.setAttribute("class", "tr"+l);
-//         tbody.appendChild(tr);
-//         var td = document.createElement("td");
-//         td.innerHTML = i+1;
-//         tr.appendChild(td);
-//         var input = document.createElement("input");
-//         input.setAttribute("type", "hidden");
-//         var v = i + 1;
-//         input.setAttribute("id", "id"+v);
-//         input.setAttribute("value", data[0]);
-//         alert(data[0]);
-//         input.setAttribute("name", "id");
-//         tr.appendChild(input);
-//         var tdLength1 = tdLength + 1;
-//         for( let l = 1; l<=tdLength1; l++){
-//           console.log(l);
-//         if(l === tdLength1){
-//         var td = document.createElement("td");
-//         td.innerHTML =" <button type='submit' class='btn btn-primary btn-sm' id='edit_button"+v+"'  onclick='edit_row(event,"+v+", tdLength)'> <i class='fas fa-pencil-alt'></i></button><button type ='submit' class='btn btn-danger btn-sm' id='cancel_button"+v+"' onclick='cancel(event, '"+v+"', '"+controller+"','anulate');' style='display:none;''><i class='fa-solid fa-ban'></i></button><button type='submit' id= 'save_button"+v+"' class='btn btn-success btn-sm' class='save' style='display:none;' onclick='save_row(event, '"+v+"', '"+controller+"','updateRowResp', tdLength);'><i class='fas fa-check'></i></button><button type='submit' class='btn btn-danger btn-sm' id='delete_button"+v+"' onclick='delete_row(event, '"+v+"', '"+controller+"')'><i class='fas fa-trash'></i></button>"
-//         tr.appendChild(td);
-//         }
-//         else if(l === tdLength1 - 1){
-//         var td = document.createElement("td");
-//         td.setAttribute("class", "td"+l);
-//         td.innerHTML = "<img id='blah"+v+"' src='views/images/"+controller+"/"+data[l]+"'>";
-//         tr.appendChild(td);
-//         }
-//         else{
-//           var td = document.createElement("td");
-//           td.setAttribute("class", "td"+l);
-//           td.innerHTML = data[l];
-//         }
-//         tr.apprendChild(td);
-//   } table.appendChild(tr);}
  
-//     }else{
-//       var table = document.getElementsByTagName('table');
-//       table.innerHTML="<h1 style='padding:80px;'><center>Aucun résultat</center></h1>";
-//     }}
-//   ).catch(error =>{console.log(error.message);});
-  
-// }
+  }
+}
