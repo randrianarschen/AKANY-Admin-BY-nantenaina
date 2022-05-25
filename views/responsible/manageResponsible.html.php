@@ -6,12 +6,13 @@
                   <input type="text" class="form-control" placeholder="Entrez votre mot clé" id="search" pwa2-uuid="EDITOR/input-A38-D17-324F7-BCF" pwa-fake-editor="" spellcheck="false" data-ms-editor="true" onkeyup="searchAny();">
                 </div>
                 <div class="col-md-2 text-right">
-                  <span class="pr-3">Rows Per Page:</span>
+                  <span class="pr-3">ligne par page:</span>
                 </div>
                 <div class="col-md-2 ">
                     <div class="d-flex justify-content-end">
                         <select class="custom-select" name="rowsPerPage" id="changeRows">
-                            <option value="1">1</option>
+                        <option value="5000">tout les lignes</option>
+                        <option value="1">1</option>
                             <option value="5" selected="">5</option>
                             <option value="10">10</option>
                             <option value="15">15</option>

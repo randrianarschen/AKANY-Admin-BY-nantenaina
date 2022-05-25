@@ -1,4 +1,5 @@
 
+
 var page = window.location.href;
 page = page.substr((page.lastIndexOf('/') + 1));
 switch(page){
@@ -342,3 +343,4 @@ function () {
   }
 }
 )}
+
