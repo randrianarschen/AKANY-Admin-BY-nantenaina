@@ -21,21 +21,10 @@
 
     <div class="card-header">
         <h3 class="card-title">Toutes les demandes</h3>
-
-        <div class="card-tools">
-            <ul class="pagination pagination-sm float-right">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </div>
-    </div>
     
     <!-- /.card-header -->
     <div class="card-body p-0">
-        <table class="table table-striped" >
+        <table id="dtBasicExample" class="  table-sm table table-striped" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th style="width: 10px">N°</th>
@@ -75,19 +64,11 @@
         </table>
     </div>
     <table class="table" id="table-id">
-</table>
-<div class="pagination-container">
-  <nav>
-    <ul class="pagination">
-      <li data-page="prev">
-      <span> < <span class="sr-only">(current)</span></span>
-      </li>
-      <li data-page="next" id="prev">
-      <span> > <span class="sr-only">(current)</span></span>
-      </li>
-    </ul>
-  </nav>
+</table>   <!-- /.card-body -->
 </div>
-
-    <!-- /.card-body -->
-</div>
+<div class="row">
+            <div class="col-sm-12 col-md-4">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
+            </div>
+            <div class="dataTables_paginate paging_simple_numbers" id="selectedColumn_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="selectedColumn_previous"><a href="#" aria-controls="selectedColumn" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="selectedColumn" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="selectedColumn" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="selectedColumn" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="selectedColumn" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="selectedColumn" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="selectedColumn" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="selectedColumn_next"><a href="#" aria-controls="selectedColumn" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div>
+        </div>

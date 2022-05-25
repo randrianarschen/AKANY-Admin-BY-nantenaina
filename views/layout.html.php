@@ -473,6 +473,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="./views/javascript/jsNeeded1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
   <script src="js/js.js"></script>
+  <script src="./views/javascript/jsNeeded2.js"></script>
 
 </body>
 

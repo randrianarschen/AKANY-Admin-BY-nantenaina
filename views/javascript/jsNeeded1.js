@@ -342,29 +342,3 @@ function () {
   }
 }
 )}
-function searchAny(){
-  var input, filter, table, tr, i, txtValue;
-  input = document.getElementById("search");
-  filter = input.value.toUpperCase();
-  table = document.getElementsByClassName("table");
-  tr = document.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 1; i < tr.length; i++) {
-  var td = [];  
-  tr[i].style.display = "none";
-   for( var j = 0; j< 6 ; j++){
-    td[j] = tr[i].getElementsByTagName("td")[j];
-    if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-
-      // show the row
-      tr[i].style.display = "";
-
-      // skip to the next row
-      continue;
-
-    }
-  }
- 
-  }
-}
