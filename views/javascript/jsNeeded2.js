@@ -1,68 +1,84 @@
-var tr = document.getElementsByTagName('tr'); 
+var rowLim = document.getElementById('changeRows').value;
+var tr = document.getElementsByTagName('tr');
+var rows = parseInt(tr.length)-1;
+function createPagination(){
+  if(rows/rowLim>1){
+     var page = Math.ceil(((tr.length)-1)/rowLim);
+     var pageLim = parseInt(page+2);
+     for(let m = 0; m<pageLim; m++){
+       var button = document.createElement('button');
+       if(m == 0){
+       button.setAttribute('class', 'btn btn-info');
+       button.innerHTML = 'Précédent';
+       button.setAttribute('onclick', 'previous()');
+       }
+        else if(m == pageLim-1){
+        button.setAttribute('class', 'btn btn-info');
+        button.innerHTML = 'suivant';
+        button.setAttribute('onclick', 'nextPage()');
+        }
+       else{
+    button.setAttribute('class','btn ');
+    button.innerHTML = m;
+    button.setAttribute('onclick','pagination('+m+')');
+       }
+      
+      divPag.appendChild(button);
+  }
+ 
+}
+}
+
 for(var i = 1; i <tr.length; i++){
+  var tdata = document.getElementById('row'+i)
+  tdata.style.display = 'hidden';
+}
+var divPag = document.getElementById('selectedColumn_paginate');
+  function active(m){
+    if(rows/rowLim>1){
+    var current = divPag.getElementsByClassName('btn-primary')[0];  
+  if(current != undefined){
+    console.log(current);
+   current.classList.remove("btn-primary");}
+  divPag.getElementsByClassName('btn')[m].classList.add('btn-primary');}}
+
+  function manageLimitTable( m){
+    if(rows/rowLim>1){
+  var to = m * parseInt(rowLim);
+  var from = to - parseInt(rowLim-1);
+  var tr = document.getElementsByTagName('tr'); 
+  for(var i = 1; i <tr.length; i++){
   var tdata = document.getElementById('row'+i)
   tdata.style.display = 'none';
 }
-
-var ulpag = document.getElementById('pagination');
-function limitTable(rowLim=5, i=1){
-  var lim = parseInt(rowLim) + 1;
-      for(var i; i <=rowLim; i++){
-          var rowTo = document.getElementById('row'+i);
-          console.log(rowTo);
+  for(var from ; from <= to; from++){
+          var rowTo = document.getElementById('row'+from);
           rowTo.style.display = '';
       }
-      for(var j = lim; j< tr.length; j++){
-          var row = document.getElementById('row'+j);
-          row.style.display = 'none';
-      } 
-      console.log(ulpag);
-      console.log(tr.length-1);
-      if(((tr.length)-1)/rowLim>1){
-         var page = Math.ceil(((tr.length)-1)/rowLim);
-         console.log(page);
-         var pageLim = parseInt(page+2);
-         for(let m = 0; m<pageLim; m++){
-           var alink = document.createElement('a');
-            alink.setAttribute('href', '#');
-            alink.setAttribute('class', 'page-link');
-           if(m == 0){
-          var lipag = document.createElement('li');
-          lipag.setAttribute('class', 'paginate_button page-item previous disabled');
-          lipag.setAttribute('id', 'selectedColumn_previous');
-          lipag.setAttribute('onclick', 'previous()');
-          var textNode = document.createTextNode('Précédent');
-          alink.appendChild(textNode);
-          lipag.appendChild(alink);
-           }
-            else if(m == pageLim-1){
-          var lipag = document.createElement('li');
-          lipag.setAttribute('class', 'paginate_button page-item next ');
-          lipag.setAttribute('id', 'selectedColumn_next');
-          lipag.setAttribute('onclick', 'nextPage()');
-          var textNode = document.createTextNode('Suivant');
-          alink.appendChild(textNode);
-          lipag.appendChild(alink);
-           }
-           else{
-          var lipag = document.createElement('li');
-          lipag.setAttribute('class', 'paginate_button page-item');
-          lipag.setAttribute('id', 'selectedColumn_next');
-          lipag.setAttribute('onclick', 'pagination('+m+')');
-          var textNode = document.createTextNode(m);
-          alink.appendChild(textNode);
-          lipag.appendChild(alink);
-           }
-            console.log(lipag);
-            ulpag.appendChild(lipag);
-      }
-     
+  }else{
+    for(var i = 1; i <tr.length; i++){
+  var tdata = document.getElementById('row'+i)
+  tdata.style.display = '';
+}
   }
+  }
+function limitTable(){
+  var lim = parseInt(rowLim) + 1;
+      createPagination();
+      active(m);
+      manageLimitTable();
+}
+function pagination(m){
+  let rowLim = document.getElementById('changeRows').value;
+  active(m);
+  manageLimitTable(rowLim, m);
 }
   document.getElementById('changeRows').onchange = function() {
-    var rowLim = this.value;
-    ulpag.innerHTML = "";
-    limitTable();
+    let rowLim = this.value;
+    var m =divPag.getElementsByClassName('btn-primary')[0].innerHTML;
+    divPag.innerHTML = "";
+      console.log(m);
+   limitTable(rowLim, m);
 }
 
  async function searchAny(){
@@ -72,6 +88,13 @@ function limitTable(rowLim=5, i=1){
   table = document.getElementsByClassName("table");
   tr = document.getElementsByTagName("tr");
   // Loop through all table rows, and hide those who don't match the search query
+  if(filter == ""){
+    var rowLim = document.getElementById('changeRows').value;
+    var m = divPag.getElementsByClassName('btn-primary')[0].innerHTML;
+      console.log(m);
+    manageLimitTable(m);
+
+}else{
   for (i = 1; i < tr.length; i++) {
   var td = [];  
   tr[i].style.display = "none";
@@ -85,35 +108,11 @@ function limitTable(rowLim=5, i=1){
     }
   }
  
-  }
-  if(filter == ""){
-      var rowLim = document.getElementById('changeRows').value;
-  limitTable();
-  
-}
+  }}
+
  }
+limitTable(rowLim, 1);
 
-limitTable();
-function previous(){
-
-}
-function nextPage(){}
-function pagination(m){
-  this.classList.add('active');
-  var rowLim = document.getElementById('changeRows').value;
-  var to = m * parseInt(rowLim);
-  var from = to - parseInt(rowLim-1);
-  var tr = document.getElementsByTagName('tr'); 
-for(var i = 1; i <tr.length; i++){
-  var tdata = document.getElementById('row'+i)
-  console.log(rowTo);
-  tdata.style.display = 'none';
-}
-      for(var from ; from <= to; from++){
-          var rowTo = document.getElementById('row'+from);
-          rowTo.style.display = '';
-      }
-  }
 
 
     
