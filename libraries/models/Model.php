@@ -42,10 +42,9 @@ class Model
     $insert = $this->pdo->prepare("INSERT INTO {$this->table}($this->columns)VALUES ($this->valToInsert)");
     $insert->execute($td);
   }
-  public function search(array $td = []){
-    extract($td);
-    $search = $this->pdo->query("SELECT * FROM {$this->table} WHERE $col LIKE '%$keywords%'");
-    $results = $search->fetch();
+  public function search($keywords){
+    $search = $this->pdo->query("SELECT * FROM {$this->table} WHERE $this->col LIKE '%$keywords%' ORDER BY id DESC");
+    $results = $search->fetchAll();
     return $results;
   }
 

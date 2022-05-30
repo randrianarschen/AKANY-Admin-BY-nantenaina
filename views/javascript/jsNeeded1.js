@@ -1,4 +1,5 @@
 
+
 var page = window.location.href;
 page = page.substr((page.lastIndexOf('/') + 1));
 switch(page){
@@ -76,7 +77,7 @@ switch(page){
 
 var controller = new AbortController();
   var signal = controller.signal;
-var sendRequest = async (url, data) => {
+var uploadData = async (url, data) => {
  
   const request = await fetch(url, {method:'POST', body: data});
    console.log(request);
@@ -89,7 +90,7 @@ var sendRequest = async (url, data) => {
       console.log("oops");
     }  
     return response;}
-var deleteData = async (url) => {
+var sendRef = async (url) => {
   var response = await fetch(url);
   var result = await response.json();
   if(result.ok) {
@@ -110,13 +111,13 @@ function cancel(event, no, par1, par2){
   var id = document.getElementById("id"+no).value;
   var data = new FormData();
   data.append('id', id);
-  sendRequest("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
+  uploadData("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
   document.getElementById("edit_button"+no).style.display="block";
   document.getElementById("delete_button"+no).style.display="block";
   document.getElementById("save_button"+no).style.display="none";
   document.getElementById("cancel_button"+no).style.display="none"; 
 var td = document.getElementsByClassName("td"+no);
-console.log(response);
+console.log(Object.values(response));
 console.log(td);
  if(par1 == "witness"){
   td[5].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
@@ -130,7 +131,7 @@ console.log(td);
     td[4].innerHTML= "<img id='image"+no+"' src='views/images/donation/"+response.image+"' width='100px' height='100px'>"
     td[3].innerHTML = response.montant;
     td[2].innerHTML= response.cree_a;
-    td[1].innerHTML= response.date_motif;
+    td[1].innerHTML= response.motif;
     td[0].innerHTML= response.sujet;
    
   }
@@ -141,7 +142,7 @@ console.log(td);
     td[0].innerHTML= response.object;
   }
   else if(par1=="responsible"){
-    td[1].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
+    td[3].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
     td[2].innerHTML = response.function;
     td[1].innerHTML= response.firstname_resp;
     td[0].innerHTML= response.name_resp;
@@ -172,13 +173,13 @@ function edit_row(event, no, tdLength)
  let val;
  val = td[k].innerHTML;
  if(k == 2){
-   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' value='"+val+"'>";
+   td[k].innerHTML = "<input type='datetime' class='iden"+no+"' width='130' value='"+val+"'>";
  }else if(k=== tdLength-1){
   var src = document.getElementById("image"+no+"").src;
    td[k].innerHTML = "<img id='blah"+no+"' style='display:block;' src='"+src+"'  width='100px' height='100px'><div><span class='btn btn-file btn-success'><span class='fileupload-new'>Selectioner image</span><input type='file' class='imgToEdit' name='image'  accept='.jpg, .jpeg, .gif, .png'    required id='img"+no+"' onchange='showPreview(event, "+no+");'></span></div>";
  }
  else{
-  td[k].innerHTML="<input type='text' class ='iden"+no+"' value='"+val+"'>";
+  td[k].innerHTML="<input  type='text' class ='iden"+no+"' width='130' value='"+val+"'>";
  }
  }
  console.log('you can edit it');
@@ -215,7 +216,7 @@ if(fileArray.length > 0){
       console.log(file);
     
     }
-    sendRequest("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
+    uploadData("index.php?controller="+par1+"&task="+par2+"", data).then(response =>{ 
       console.log(response);
       if(response.success === true) { 
          var td =  document.getElementsByClassName("td"+no);
@@ -342,3 +343,4 @@ function () {
   }
 }
 )}
+
