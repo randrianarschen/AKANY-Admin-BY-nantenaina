@@ -142,7 +142,7 @@ console.log(td);
     td[0].innerHTML= response.object;
   }
   else if(par1=="responsible"){
-    td[1].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
+    td[3].innerHTML= "<img id='image"+no+"' src='views/images/responsibles/"+response.image+"' width='100px' height='100px'>"
     td[2].innerHTML = response.function;
     td[1].innerHTML= response.firstname_resp;
     td[0].innerHTML= response.name_resp;

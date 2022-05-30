@@ -69,12 +69,10 @@
     
 </div>
 <div class="row">
-            <div class="col-sm-12 col-md-4">
-                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
-            </div>
-            <div class="dataTables_paginate paging_simple_numbers" id="selectedColumn_paginate">
-            <ul id="pagination" class="pagination">
-              
-            </ul>
+        <div class="col-sm-12 col-md-4">
+            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
         </div>
+        <div class="dataTables_paginate paging_simple_numbers" id="selectedColumn_paginate">
+            
         </div>
+    </div>
