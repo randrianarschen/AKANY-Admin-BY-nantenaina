@@ -15,6 +15,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <!-- Theme style -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<!-- Load WysiBB JS and Theme -->
+<script src="/js/jquery.wysibb.min.js"></script>
+<link rel="stylesheet" href="/css/default/wbbtheme.css" />
+
+<!-- Init WysiBB BBCode editor -->
+<script>
+$(function() {
+$("#editor").wysibb();
+})
+</script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -395,7 +407,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Accueil</a></li>
                 <li class="breadcrumb-item active"><?= $pageTitle ?></li>
               </ol>
             </div><!-- /.col -->
@@ -474,7 +486,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
   <script src="js/js.js"></script>
   <script src="./views/javascript/jsNeeded2.js"></script>
-  
+  <script srec="file:///C:/Users/NANTENAINA/Downloads/Compressed/AdminLTE-3.2.0/AdminLTE-3.2.0/build/js/CardRefresh.js"></script>
 
 
 </body>

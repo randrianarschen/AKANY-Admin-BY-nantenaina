@@ -319,11 +319,11 @@ var img = document.getElementById('blah');
 console.log(img);
 
 var navlink = document.getElementsByClassName('nav-link');
-for( let j = 0; j<navlink.length; j++ ){
-   navlink[j].addEventListener('click', function(){
-     $(this).addClass('active');
-    });
-  }
+// for( let j = 0; j<navlink.length; j++ ){
+//    navlink[j].addEventListener('click', function(){
+//      $(this).addClass('active');
+//     });
+//   }
  
 for(let i = 0; i<3; i++){
 document.getElementById('spanEye')[i].addEventListener('click', 

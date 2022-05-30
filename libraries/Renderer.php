@@ -12,10 +12,15 @@ class Renderer
     public static function render(string $path, array $variables = [])
     {
         extract($variables);
-
-        ob_start();
-        require('views/' . $path . '.html.php');
-        $pageContent = ob_get_clean();
+         ob_start();
+     if($path1 === 'email/emailBox'){
+       require('views/' . $path1 . '.html.php');
+       $content = ob_flush();
+        require('views/email.html.php');
+     }else{
+        require('views/' . $path . '.php');
+     }
+        $pageContent = ob_end_flush();
         require('views/layout.html.php');
     }
     /**
