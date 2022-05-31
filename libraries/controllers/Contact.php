@@ -36,6 +36,6 @@ class Contact extends Controller{
             }
        }
   $pageTitle =  $this->pageTitle ;
-  \Renderer::render($this->view2, compact('pageTitle', 'error_msg'));
+  \Renderer::render($this->view2,'', compact('pageTitle', 'error_msg'));
 }
 }

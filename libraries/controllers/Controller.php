@@ -22,9 +22,9 @@ abstract class Controller
      */
 
     public function index()
-    {
+    { 
         $pageTitle = $this->pageTitle;
-        \Renderer::render($this->view2, compact('pageTitle'));
+        \Renderer::render($this->view2, '' , compact('pageTitle'));
     }
 
     public function delete(): void

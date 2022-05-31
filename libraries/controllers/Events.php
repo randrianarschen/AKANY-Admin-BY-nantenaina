@@ -36,13 +36,13 @@ class Events extends Controller
       }
     }
     $pageTitle = $this->pageTitle;
-    \Renderer::render($this->view1, compact('pageTitle', 'error_msg', 'title_event',  'description_event'));
+    \Renderer::render($this->view1, '', compact('pageTitle', 'error_msg', 'title_event',  'description_event'));
   }
   public function manageEvent(){
     $error_msg="";
     $pageTitle = $this->pageTitle;
      $events = $this->model->findAll();
-     \renderer::render($this->view2, compact('pageTitle', 'events', 'error_msg'));
+     \renderer::render($this->view2,'', compact('pageTitle', 'events', 'error_msg'));
   }
   public function updateRowEvent(){
    

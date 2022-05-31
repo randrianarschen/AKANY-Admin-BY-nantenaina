@@ -143,7 +143,7 @@ $("#editor").wysibb();
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
+            <span class="badge badge-danger navbar-badge">15</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-header">15 Notifications</span>
@@ -487,7 +487,7 @@ $("#editor").wysibb();
   <script src="js/js.js"></script>
   <script src="./views/javascript/jsNeeded2.js"></script>
   <script srec="file:///C:/Users/NANTENAINA/Downloads/Compressed/AdminLTE-3.2.0/AdminLTE-3.2.0/build/js/CardRefresh.js"></script>
-
+  <script src = "./views/javascript/jsNeeded3.js"></script>
 
 </body>
 

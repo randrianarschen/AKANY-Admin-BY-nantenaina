@@ -1,8 +1,7 @@
 <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="" class="btn btn-primary btn-block mb-3"><i class="fa-solid fa-pen-clip"></i> &nbsp;  &nbsp; Nouveau message</a>
-          <a href="" class="btn btn-primary btn-block mb-3"><i class="fa-solid fa-angle-left"></i>&nbsp;  &nbsp; retourner à la boite</a>
+        <a href="index.php?controller=Mailbox&task=newMessage" class=" btn btn-danger btn-block mb-3"><i class="fa-solid fa-pen-clip"></i> &nbsp;  &nbsp; Nouveau message</a>
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Dossier</h3>
@@ -16,9 +15,9 @@
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                  <a href="#" class="nav-link">
+                  <a href="index.php?controller=Mailbox&task=index" class="nav-link">
                     <i class="fas fa-inbox"></i> Boîte-Email
-                    <span class="badge bg-primary float-right">12</span>
+                    <span class="badge bg-danger float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -34,7 +33,7 @@
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="fas fa-filter"></i> Message indésirable
-                    <span class="badge bg-warning float-right">65</span>
+                    <span class="badge bg-danger float-right">65</span>
                   </a>
                 </li>
                 <li class="nav-item">

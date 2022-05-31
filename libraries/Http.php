@@ -1,6 +1,6 @@
 <?php
 
-class Http
+ class Http
 {
     /**
      * redirect to a specific page

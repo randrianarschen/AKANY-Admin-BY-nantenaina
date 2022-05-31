@@ -39,7 +39,7 @@ class Witness extends Controller
       }
     }
     $pageTitle = $this->pageTitle;
-    \Renderer::render($this->view1, compact('pageTitle', 'error_msg', 'name_witness', 'title', 'function', 'link_video'));
+    \Renderer::render($this->view1, '', compact('pageTitle', 'error_msg', 'name_witness', 'title', 'function', 'link_video'));
   }
 
 
@@ -49,7 +49,7 @@ class Witness extends Controller
     $error_msg = "";
     $pageTitle = $this->pageTitle;
     $witnesses = $this->model->findAll();
-    \renderer::render($this->view2, compact('pageTitle', 'witnesses', 'error_msg'));
+    \renderer::render($this->view2, '', compact('pageTitle', 'witnesses', 'error_msg'));
   }
   public function updateRowWit(){
    

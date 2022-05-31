@@ -32,13 +32,13 @@ class Responsible extends Controller{
 
         }
     $pageTitle = $this->pageTitle;
-        \Renderer::render($this->view1, compact('pageTitle', 'error_msg', 'name_resp', 'firstname_resp', 'function_resp'));
+        \Renderer::render($this->view1, '', compact('pageTitle', 'error_msg', 'name_resp', 'firstname_resp', 'function_resp'));
 }
 public function manageResponsible(){
    $error_msg="";
    $pageTitle = $this->pageTitle;
     $responsibles = $this->model->findAll();
-    \renderer::render($this->view2, compact('pageTitle', 'responsibles', 'error_msg'));
+    \renderer::render($this->view2, '', compact('pageTitle', 'responsibles', 'error_msg'));
 }
 public function updateRowResp(){
    
