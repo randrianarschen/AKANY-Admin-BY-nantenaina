@@ -61,4 +61,5 @@ class Admin extends Controller
   public function logOut(){
 
   }
+
 }

@@ -486,7 +486,7 @@ $("#editor").wysibb();
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
   <script src="js/js.js"></script>
   <script src="./views/javascript/jsNeeded2.js"></script>
-  <script srec="file:///C:/Users/NANTENAINA/Downloads/Compressed/AdminLTE-3.2.0/AdminLTE-3.2.0/build/js/CardRefresh.js"></script>
+  <script src="file:///C:/Users/NANTENAINA/Downloads/Compressed/AdminLTE-3.2.0/AdminLTE-3.2.0/build/js/CardRefresh.js"></script>
   <script src = "./views/javascript/jsNeeded3.js"></script>
 
 </body>
