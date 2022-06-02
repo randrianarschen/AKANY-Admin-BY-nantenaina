@@ -4,6 +4,7 @@
                 <h3 class="card-title"> Ecrivez un nouveau message</h3>
               </div>
               <!-- /.card-header -->
+              <form method="POST" action = ""  enctype="multipart/form-data">
               <div class="card-body">
                 <div class="form-group">
                   <input class="form-control" placeholder="À:" name="to">
@@ -43,6 +44,7 @@
                 </div>
                 <button type="reset" class="btn btn-default"><i class="fas fa-times"></i>Abandonner</button>
               </div>
+              </form>
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->

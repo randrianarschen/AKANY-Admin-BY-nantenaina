@@ -6,6 +6,6 @@ class Admin extends Model {
     protected $columns = "username_admin, password_admin, image_admin";
     public function getName(){
         $results =  $this->findOne(1);
-        return $results['username_admin'];
+        return $results['username_admin']??='bbbb';
     }
 }
