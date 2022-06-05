@@ -283,7 +283,7 @@ function delete_row(event, no, param)
     }
   })
 }   
-                                   
+                               
  function showPreview(event, no) {
     if(event.target.files.length > 0){
       var file = event.target.files[0];
@@ -298,15 +298,15 @@ function delete_row(event, no, param)
       var preview = document.getElementById("blah");
         preview.src = src;
         preview.style.display = "block";
-        var change = $('#selectImg');
-        change.innerHTML = "change";}
+    }
       else{
       var preview = document.getElementById("blah"+no);
+      if(preview != undefined){
       console.log(preview);
       preview.src = src;
-      preview.style.display = "block";
-      var change = $('#selectImg');
-      change.innerHTML = "change";  
+      preview.style.display = "block";} else{
+        console.log("undefined");
+      }
       }}
       else{
      
@@ -315,15 +315,15 @@ function delete_row(event, no, param)
       }
   }}
 
-var img = document.getElementById('blah');
-console.log(img);
+// var img = document.getElementById('blah');
+// console.log(img);
 
-var navlink = document.getElementsByClassName('nav-link');
-for( let j = 0; j<navlink.length; j++ ){
-   navlink[j].addEventListener('click', function(){
-     $(this).addClass('active');
-    });
-  }
+// var navlink = document.getElementsByClassName('nav-link');
+// for( let j = 0; j<navlink.length; j++ ){
+//    navlink[j].addEventListener('click', function(){
+//      $(this).addClass('active');
+//     });
+//   }
  
 for(let i = 0; i<3; i++){
 document.getElementById('spanEye')[i].addEventListener('click', 

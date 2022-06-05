@@ -52,6 +52,14 @@ class Admin extends Controller
         }
 
         $pageTitle = $this->pageTitle;
-        \Renderer::render($this->view2, compact('pageTitle', 'error_msg', 'newAdminName', 'newPass', 'newPassConfirm'));
+        \Renderer::render($this->view2, '', compact('pageTitle', 'error_msg', 'newAdminName', 'newPass', 'newPassConfirm'));
     }
+    public function logIn(){
+        
+
+    }
+  public function logOut(){
+
+  }
+
 }

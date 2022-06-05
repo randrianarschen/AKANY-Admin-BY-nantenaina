@@ -42,7 +42,7 @@ class Donation extends Controller
       }
     }
     $pageTitle = $this->pageTitle;
-    \Renderer::render($this->view1, compact('pageTitle', 'error_msg', 'sujet', 'montant', 'motif'));
+    \Renderer::render($this->view1, '',  compact('pageTitle', 'error_msg', 'sujet', 'montant', 'motif'));
   }
 
   /**
@@ -54,7 +54,7 @@ class Donation extends Controller
   {
     $pageTitle = $this->pageTitle;
     $donations = $this->model->findAll();
-    \Renderer::render('donation/manageAsking', compact('pageTitle', 'donations'));
+    \Renderer::render('donation/manageAsking', '', compact('pageTitle', 'donations'));
   }
   public function updateRowDonat(){
    

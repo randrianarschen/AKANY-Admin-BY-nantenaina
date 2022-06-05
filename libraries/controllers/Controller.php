@@ -22,9 +22,9 @@ abstract class Controller
      */
 
     public function index()
-    {
+    { 
         $pageTitle = $this->pageTitle;
-        \Renderer::render($this->view2, compact('pageTitle'));
+        \Renderer::render($this->view2, '' , compact('pageTitle'));
     }
 
     public function delete(): void
@@ -46,11 +46,6 @@ abstract class Controller
            echo json_encode($response);
         }
     }
-  public function searchAny():void{
-        if (isset($_GET['search']) && !empty($_GET['search'])) {
-            $keywords = $_GET['search'];
-            $response = $this->model->search($keywords);
-             echo json_encode($response);     
-}
-}
+
+
 }

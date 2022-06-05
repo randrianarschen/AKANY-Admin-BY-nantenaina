@@ -9,15 +9,25 @@ class Renderer
      * @param  mixed $variables
      * @return void
      */
-    public static function render(string $path, array $variables = [])
+    public static function render(string $path, $path1, array $variables = [])
     {
-        extract($variables);
-
-        ob_start();
-        require('views/' . $path . '.html.php');
+        extract($variables);  
+     if($path1 === 'email/emailBox' || $path1 ==='email/sendEmail'){
+      ob_start(); 
+     require('views/'.$path1.'.html.php');
+     $content = ob_get_clean();
+     ob_start();
+     require('views/email.html.php');
+     $pageContent = ob_get_clean();
+         
+     }else{
+        ob_start(); 
+        require('views/'.$path.'.html.php');
         $pageContent = ob_get_clean();
-        require('views/layout.html.php');
-    }
+      }
+      require('views/layout.html.php');
+    
+}
     /**
      * To show error message
      *

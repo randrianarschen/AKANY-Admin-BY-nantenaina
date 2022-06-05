@@ -35,14 +35,14 @@ class Blog extends Controller
         }
 
         $pageTitle = $this->pageTitle;
-        \Renderer::render($this->view1, compact('pageTitle', 'object', 'contain_1', 'contain_2', 'error_msg'));
+        \Renderer::render($this->view1,'', compact('pageTitle', 'object', 'contain_1', 'contain_2', 'error_msg'));
     }
     public function manageBlog()
     {
         $error_msg = "";
         $pageTitle = $this->pageTitle;
         $blogs = $this->model->findAll();
-        \renderer::render($this->view2, compact('pageTitle', 'blogs', 'error_msg'));
+        \renderer::render($this->view2, '', compact('pageTitle', 'blogs', 'error_msg'));
     }
     public function updateRowBlog(){
    
