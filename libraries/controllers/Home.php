@@ -12,6 +12,12 @@ class Home extends Controller
         $donations = $donations->findAll();
         $events = new \models\Events;
         $events = $events->findAll();
-        \Renderer::renderCust(compact('donations', 'events'));
+        $blogs = new \models\Blog;
+        $blogs = $blogs->findAll();
+        $responsables = new \models\Responsible;
+        $responsables = $responsables->findAll();
+        $witnesses = new \models\Witness;
+        $witnesses = $witnesses->findAll();
+        \Renderer::renderCust(compact('donations', 'events', 'blogs', 'responsables', 'witnesses'));
     }
 }

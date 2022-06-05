@@ -166,7 +166,7 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-money"></span>
               	</div>
-                <strong class="number" data-number="<?= $totalnbreuro; ?>">0</strong>&nbsp;$
+                <strong class="number" data-number="<?= $totalnDollar; ?>">0</strong>&nbsp;$
                 <span>besoin</span>
               </div>
             </div>
@@ -245,7 +245,14 @@
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
           </div>
         </div>
+		<?php
+		 for($i=0;$i<count($witnesses)/3;$i++){
+		?>
 				<div class="row">
+					<?php
+					for($j=$i; $j<$i+3; $j++){
+						$witness = $witnesses[$i*3+$j];
+					?>
         	<div class="col-md-4">
         		<div class="sermon-wrap ftco-animate">
     					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(./views/images/sermon-1.jpg);">
@@ -268,53 +275,13 @@
     					</div>
   					</div>
         	</div>
-        	<div class="col-md-4">
-        		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(views/images/sermon-2.jpg);">
-    						<div class="text-content p-4 text-center">
-    							<span>par:</span>
-    							<h3>Gilbert Ranaivo</h3>
-    							<p class="">
-										<a href="https://vimeo.com/45830194" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
-										<a href="#" class="btn-custom p-2 text-center"><span class="icon-download"></span> Télécharger</a>
-									</p>
-    						</div>
-    					</div>
-    					<div class="text pt-3 text-center">
-    						<h2 class="mb-0"><a href="sermon.html">Developing Spiritual Mentality</a></h2>
-    						<div class="meta">
-		  						<p class="mb-0">
-			  						<span>24 Mars 2021</span>
-		  						</p>
-		  					</div>
-    					</div>
-  					</div>
-        	</div>
-        	<div class="col-md-4">
-        		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(views/images/sermon-3.jpg);">
-    						<div class="text-content p-4 text-center">
-    							<span>par:</span>
-    							<h3>Gilbert Ranaivo</h3>
-    							<p class="">
-										<a href="https://vimeo.com/45830194" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
-										<a href="#" class="btn-custom p-2 text-center"><span class="icon-download"></span> Télécharger</a>
-									</p>
-    						</div>
-    					</div>
-    					<div class="text pt-3 text-center">
-    						<h2 class="mb-0"><a href="sermon.html">Let the Bible Motivate You</a></h2>
-    						<div class="meta">
-		  						<p class="mb-0">
-			  						<span>24 Mars 2021</span>
-		  						</p>
-		  					</div>
-    					</div>
-  					</div>
-        	</div>
-
-        
+			<?php
+			}
+			?>
         </div>
+		<?php
+		 }
+		?>
 			</div>
 		</section>
 
@@ -378,7 +345,8 @@
 				 $totalInAr = 0;
 				 foreach($donations as $donation){
 					 $j++;
-		   $dntInDollar = $donation['montant']/4000;
+		   $dollarVal =  $donation['montant']/4055.41;
+		   $dntInDollar = number_format($dollarVal, 2, '.', '');
             $totalInAr =  $totalInAr + $donation['montant'];  
             $totalInDollar = $totalInAr /4000 ;
             ?>
@@ -395,7 +363,6 @@
 								  	</div>
 								</div>
 								<p class="donate"><span class="target-goal">we expect over </span><strong class="number" data-number="<?= $donation['montant'] ?>">0</strong><span>&nbsp;AR</span>&nbsp;/&nbsp;<strong class="number" data-number="<?= $dntInDollar; ?>">0</strong><span>&nbsp;$</p>
-								<p class="description"><?= $donation['description'] ?></p>
 								<p><a  data-toggle="modal" data-target="#myModalDonate" class="btn btn-primary">Donner maintenant !</a></p>
 							</div>
 						</div>
@@ -476,10 +443,14 @@
             <p>As body without the spirit is dead, so also faith without actions is dead</p>
           </div>
         </div>
+		
         <div class="row d-flex">
+			<?php 
+		   foreach($blogs as $blog){
+		?>
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <a href="single.php" class="block-20" style="background-image: url('views/images/image_1.jpg');">
+              <a href="single.php" class="block-20" style="background-image: url('views/images/blog/<?=$blog['image'];?>);">
               </a>
               <div class="text float-right d-block">
               	<div class="d-flex align-items-center pt-2 mb-4 topp">
@@ -491,8 +462,8 @@
               			<span class="mos">mars</span>
               		</div>
               	</div>
-                <h3 class="heading"><a href="single.php">Why Lead Generation is Key for Business Growth</a></h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <h3 class="heading"><a href="single.php"><?=$blog['object'];?></a></h3>
+                <p><?=$blog['contain_1']?></p>
                 <div class="d-flex align-items-center mt-4 meta">
 	                <p class="mb-0"><a href="#" class="btn btn-primary">Lire plus <span class="ion-ios-arrow-round-forward"></span></a></p>
 	                <p class="ml-auto mb-0">
@@ -503,58 +474,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="single.php" class="block-20" style="background-image: url('views/images/image_2.jpg');">
-              </a>
-              <div class="text float-right d-block">
-              	<div class="d-flex align-items-center pt-2 mb-4 topp">
-              		<div class="one mr-2">
-              			<span class="day">24</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2021</span>
-              			<span class="mos">mars</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="single.php">Why Lead Generation is Key for Business Growth</a></h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <div class="d-flex align-items-center mt-4 meta">
-	                <p class="mb-0"><a href="#" class="btn btn-primary">Lire plus <span class="ion-ios-arrow-round-forward"></span></a></p>
-	                <p class="ml-auto mb-0">
-	                	<a href="#" class="mr-2">Admin</a>
-	                	<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-	                </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="single.php" class="block-20" style="background-image: url('views/images/image_3.jpg');">
-              </a>
-              <div class="text float-right d-block">
-              	<div class="d-flex align-items-center pt-2 mb-4 topp">
-              		<div class="one mr-2">
-              			<span class="day">24</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2021</span>
-              			<span class="mos">mars</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="single.php">Why Lead Generation is Key for Business Growth</a></h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <div class="d-flex align-items-center mt-4 meta">
-	                <p class="mb-0"><a href="#" class="btn btn-primary">Lire plus <span class="ion-ios-arrow-round-forward"></span></a></p>
-	                <p class="ml-auto mb-0">
-	                	<a href="#" class="mr-2">Admin</a>
-	                	<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-	                </p>
-                </div>
-              </div>
-            </div>
-          </div>
+		  <?php
+		   }
+		  ?>
         </div>
       </div>
     </section>
@@ -569,15 +491,18 @@
           </div>
         </div>
         <div class="row">
+			<?php
+				foreach($responsables as $responsable){
+			?>
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_1.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/responsible/<?=$responsable['image']?>);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
-									<h3 class="mb-2">Lloyd Wilson</h3>
-									<span class="position mb-4">Lead Profesor</span>
+									<h3 class="mb-2"><?=$responsible['name_resp']?></h3>
+									<span class="position mb-4"><?=$responsible['function'];?></span>
 									<div class="faded">
 										<ul class="ftco-social text-center">
 			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -590,157 +515,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_2.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Rachel Parker</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_3.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_4.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_5.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_6.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_3.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_4.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Alicia Henderson</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<?php
+				}
+			?>
+				
     	</div>
     </section>
 
