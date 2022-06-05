@@ -4,7 +4,10 @@ class Application {
     public  static function process()
     {
         $controllerName = "Home";
-        $task = "index";
+        $task = "indexfr";
+        if(!empty($_GET['session'])){
+            $task = 'index';  
+        }
         if (!empty($_GET['controller'])) {
             $controllerName = ucfirst($_GET['controller']);
         }

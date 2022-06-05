@@ -73,7 +73,7 @@
 	 
 	  
 	  <section class="home-slider js-fullheight owl-carousel">
-      <div class="slider-item js-fullheight" style="background-image:url(images/bg_1.jpg);">
+      <div class="slider-item js-fullheight" style="background-image:url(./views/images/bg_1.jpg);">
       	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -92,13 +92,13 @@
         </div>
       </div>
 
-      <div class="slider-item js-fullheight" style="background-image:url(images/about.jpg);">
+      <div class="slider-item js-fullheight" style="background-image:url(./views/images/about.jpg);">
       	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
 	          <div class="col-md-8 text-center ftco-animate mt-5">
 	          	<div class="text">
-						<a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="" style="width: 180px;"></a> 
+						<a class="navbar-brand" href="index.html"><img src="./views/images/logo.png" alt="" style="width: 180px;"></a> 
 	          		<div class="subheading">
 	          			<span>Akany Tafita/Sahasoa</span>
 	          		</div>
@@ -117,7 +117,7 @@
     <section class="ftco-section ftco-no-pt ftco-no-pb ftco-about-section" id="about-section">
     	<div class="container-fluid px-0">
     		<div class="row d-md-flex text-wrapper">
-					<div class="one-half img" style="background-image: url('images/1.jpg');"></div>
+					<div class="one-half img" style="background-image: url('./views/images/1.jpg');"></div>
 					<div class="one-half half-text d-flex justify-content-end align-items-center ftco-animate">
 						<div class="text-inner pl-md-5">
               <h3 class="heading">Bienvenue à <span>Akany</span> Tafita/Sahasoa</h3>
@@ -166,7 +166,6 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-money"></span>
               	</div>
-                <?php include_once 'Admin/php/total.php';?>
                 <strong class="number" data-number="<?= $totalnbreuro; ?>">0</strong>&nbsp;$
                 <span>besoin</span>
               </div>
@@ -249,7 +248,7 @@
 				<div class="row">
         	<div class="col-md-4">
         		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/sermon-1.jpg);">
+    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(./views/images/sermon-1.jpg);">
     						<div class="text-content p-4 text-center">
     							<span>par:</span>
     							<h3>Gilbert Ranaivo</h3>
@@ -271,7 +270,7 @@
         	</div>
         	<div class="col-md-4">
         		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/sermon-2.jpg);">
+    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(views/images/sermon-2.jpg);">
     						<div class="text-content p-4 text-center">
     							<span>par:</span>
     							<h3>Gilbert Ranaivo</h3>
@@ -293,7 +292,7 @@
         	</div>
         	<div class="col-md-4">
         		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/sermon-3.jpg);">
+    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(views/images/sermon-3.jpg);">
     						<div class="text-content p-4 text-center">
     							<span>par:</span>
     							<h3>Gilbert Ranaivo</h3>
@@ -319,7 +318,7 @@
 			</div>
 		</section>
 
-		<section class="ftco-intro img" id="events-section" style="background-image: url(images/bg_3.jpg);">
+		<section class="ftco-intro img" id="events-section" style="background-image: url(views/images/bg_3.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row">
@@ -347,7 +346,7 @@
         			<div class="text p-4 d-flex align-items-center">
         				<div>
 	        				<span class="time"><?= $event['datetime_event'] ?></span>
-	        				<h3><a href="#"><?= $event['tile_event'] ?></a></h3>
+	        				<h3><a href="#"><?= $event['title_event'] ?></a></h3>
 	        				<div class="meta">
 		        				<p class="desc1"><span class="icon-user mr-1"></span> by professor: <a href="#">Jerry Simon</a></p>
 		        				<p class="desc2"><span class="icon-location"></span> <?= $event['description_event'] ?></p>
@@ -376,10 +375,11 @@
 				<div class="row">
 				<?php	
          		$j = 0;
-				 $total = 0;
+				 $totalInAr = 0;
 				 foreach($donations as $donation){
 					 $j++;
-            $totalInAr =  $total + $donation['montant'];  
+		   $dntInDollar = $donation['montant']/4000;
+            $totalInAr =  $totalInAr + $donation['montant'];  
             $totalInDollar = $totalInAr /4000 ;
             ?>
                 				<!-- one cause -->
@@ -387,14 +387,14 @@
 						<div class="cause-entry ftco-animate">
 							<a href="#" class="img" style="background-image: url(views/images/donation/<?= $donation['image'] ?>);"></a>
 							<div class="text p-3">
-								<h3><a href="cause.html"><?= $donation['but'] ?></a></h3>
+								<h3><a href="cause.html"><?= $donation['sujet'] ?></a></h3>
 								<div class="progress mb-4">
 								 	<div class="progress-bar color-1" role="progressbar" aria-valuenow="90"
 								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
 								   
 								  	</div>
 								</div>
-								<p class="donate"><span class="target-goal">we expect over </span><strong class="number" data-number="<?= $donation['montant'] ?>">0</strong><span>&nbsp;AR</span>&nbsp;/&nbsp;<strong class="number" data-number="<?= $totalInDollar; ?>">0</strong><span>&nbsp;$</p>
+								<p class="donate"><span class="target-goal">we expect over </span><strong class="number" data-number="<?= $donation['montant'] ?>">0</strong><span>&nbsp;AR</span>&nbsp;/&nbsp;<strong class="number" data-number="<?= $dntInDollar; ?>">0</strong><span>&nbsp;$</p>
 								<p class="description"><?= $donation['description'] ?></p>
 								<p><a  data-toggle="modal" data-target="#myModalDonate" class="btn btn-primary">Donner maintenant !</a></p>
 							</div>
@@ -445,7 +445,7 @@
 		</section>
 
 
-		<section class="ftco-daily-verse img" style="background-image: url(images/bg_4.jpg);">
+		<section class="ftco-daily-verse img" style="background-image: url(views/images/bg_4.jpg);">
 			<div class="overlay"></div>
     	<div class="container">
     		<div class="row justify-content-center">
@@ -479,7 +479,7 @@
         <div class="row d-flex">
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <a href="single.php" class="block-20" style="background-image: url('images/image_1.jpg');">
+              <a href="single.php" class="block-20" style="background-image: url('views/images/image_1.jpg');">
               </a>
               <div class="text float-right d-block">
               	<div class="d-flex align-items-center pt-2 mb-4 topp">
@@ -505,7 +505,7 @@
           </div>
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <a href="single.php" class="block-20" style="background-image: url('images/image_2.jpg');">
+              <a href="single.php" class="block-20" style="background-image: url('views/images/image_2.jpg');">
               </a>
               <div class="text float-right d-block">
               	<div class="d-flex align-items-center pt-2 mb-4 topp">
@@ -531,7 +531,7 @@
           </div>
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry">
-              <a href="single.php" class="block-20" style="background-image: url('images/image_3.jpg');">
+              <a href="single.php" class="block-20" style="background-image: url('views/images/image_3.jpg');">
               </a>
               <div class="text float-right d-block">
               	<div class="d-flex align-items-center pt-2 mb-4 topp">
@@ -572,7 +572,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_1.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_1.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -593,7 +593,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_2.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_2.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -614,7 +614,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_3.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_3.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -636,7 +636,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_4.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_4.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -658,7 +658,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_5.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_5.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -679,7 +679,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_6.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_6.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -700,7 +700,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_3.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_3.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -722,7 +722,7 @@
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_4.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/Staff_4.jpg);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
@@ -774,7 +774,7 @@
               <div class="form-group">
                 <input type="submit"  value="Envoyer le message" class="btn btn-primary py-3 px-5 addtomailbtn"><br><br>
                
-                <?php include 'Admin/php/error.php'; ?>
+               
               </div>
             </form>
           
@@ -848,28 +848,28 @@
         </div>
     		<div class="row">
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery_1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
+						<a href="views/images/gallery_1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
+						<a href="views/images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
+						<a href="views/images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
+						<a href="views/images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>

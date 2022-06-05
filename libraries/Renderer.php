@@ -58,7 +58,11 @@ class Renderer
         }
         return $error;
     }
+  public static function  renderCust(array $var = []){
+    extract($var);
+    require('views/indexfr.html.php');
 
+  }
        
     /**
      * reset the form after submit
