@@ -27,7 +27,16 @@
     <link rel="stylesheet" href="./views/css/style.css">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
+	<?php
+	    $rspble = Count($responsables);
+		$neededInAr = 0;
+		foreach($donations as $donation){
+			$neededInAr = $neededInAr + $donation['montant'];
+			$neededInDollar =  $neededInAr/4000;
+		}
+	    $nbrEvents =Count($events);
+       
+	?>  
 	  
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
@@ -73,7 +82,7 @@
 	 
 	  
 	  <section class="home-slider js-fullheight owl-carousel">
-      <div class="slider-item js-fullheight" style="background-image:url(images/bg_1.jpg);">
+      <div class="slider-item js-fullheight" style="background-image:url(./views/images/bg_1.jpg);">
       	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -92,13 +101,13 @@
         </div>
       </div>
 
-      <div class="slider-item js-fullheight" style="background-image:url(images/about.jpg);">
+      <div class="slider-item js-fullheight" style="background-image:url(./views/images/about.jpg);">
       	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
 	          <div class="col-md-8 text-center ftco-animate mt-5">
 	          	<div class="text">
-						<a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="" style="width: 180px;"></a> 
+						<a class="navbar-brand" href="index.html"><img src="./views/images/logo.png" alt="" style="width: 180px;"></a> 
 	          		<div class="subheading">
 	          			<span>Akany Tafita/Sahasoa</span>
 	          		</div>
@@ -117,7 +126,7 @@
     <section class="ftco-section ftco-no-pt ftco-no-pb ftco-about-section" id="about-section">
     	<div class="container-fluid px-0">
     		<div class="row d-md-flex text-wrapper">
-					<div class="one-half img" style="background-image: url('images/1.jpg');"></div>
+					<div class="one-half img" style="background-image: url('./views/images/1.jpg');"></div>
 					<div class="one-half half-text d-flex justify-content-end align-items-center ftco-animate">
 						<div class="text-inner pl-md-5">
               <h3 class="heading">Bienvenue à <span>Akany</span> Tafita/Sahasoa</h3>
@@ -155,7 +164,7 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-user"></span>
               	</div>
-                <strong class="number" data-number="8">0</strong>
+                <strong class="number" data-number="<?=$rspble;?>">0</strong>
                 <span>Résponsables</span>
               </div>
             </div>
@@ -166,8 +175,8 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-money"></span>
               	</div>
-                <?php include_once 'Admin/php/total.php';?>
-                <strong class="number" data-number="<?= $totalnbreuro; ?>">0</strong>&nbsp;$
+				  <strong class="number" data-number="<?=$neededInAr?>">0</strong>&nbsp;Ar
+                <strong class="number" data-number="<?=$neededInDollar?>">0</strong>&nbsp;$
                 <span>besoin</span>
               </div>
             </div>
@@ -178,7 +187,7 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-home"></span>
               	</div>
-                <strong class="number" data-number="206">0</strong>
+                <strong class="number" data-number="<?= $nbrEvents ?>">0</strong>
                 <span>Occupation</span>
               </div>
             </div>
@@ -246,80 +255,41 @@
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
           </div>
         </div>
+	
 				<div class="row">
+					<?php
+				foreach($witnesses as $witness){   
+					?>
         	<div class="col-md-4">
         		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/sermon-1.jpg);">
+    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(./views/images/witness/<?=$witness['image']?>);">
     						<div class="text-content p-4 text-center">
     							<span>par:</span>
     							<h3>Gilbert Ranaivo</h3>
     							<p class="">
-										<a href="https://vimeo.com/45830194" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
+										<a href="<?=$witness['link_video']?>" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
 										<a href="#" class="btn-custom p-2 text-center"><span class="icon-download"></span> Télécharger</a>
 									</p>
     						</div>
     					</div>
     					<div class="text pt-3 text-center">
-    						<h2 class="mb-0"><a href="sermon.html">Let the Sunset Inspire You</a></h2>
+    						<h2 class="mb-0"><a href="sermon.html"><?=$witness['title']?></a></h2>
     						<div class="meta">
 		  						<p class="mb-0">
-			  						<span>24 Mars 2021</span>
+			  						<span><?=$witness['date_publication']?></span>
 		  						</p>
 		  					</div>
     					</div>
   					</div>
         	</div>
-        	<div class="col-md-4">
-        		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/sermon-2.jpg);">
-    						<div class="text-content p-4 text-center">
-    							<span>par:</span>
-    							<h3>Gilbert Ranaivo</h3>
-    							<p class="">
-										<a href="https://vimeo.com/45830194" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
-										<a href="#" class="btn-custom p-2 text-center"><span class="icon-download"></span> Télécharger</a>
-									</p>
-    						</div>
-    					</div>
-    					<div class="text pt-3 text-center">
-    						<h2 class="mb-0"><a href="sermon.html">Developing Spiritual Mentality</a></h2>
-    						<div class="meta">
-		  						<p class="mb-0">
-			  						<span>24 Mars 2021</span>
-		  						</p>
-		  					</div>
-    					</div>
-  					</div>
-        	</div>
-        	<div class="col-md-4">
-        		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/sermon-3.jpg);">
-    						<div class="text-content p-4 text-center">
-    							<span>par:</span>
-    							<h3>Gilbert Ranaivo</h3>
-    							<p class="">
-										<a href="https://vimeo.com/45830194" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
-										<a href="#" class="btn-custom p-2 text-center"><span class="icon-download"></span> Télécharger</a>
-									</p>
-    						</div>
-    					</div>
-    					<div class="text pt-3 text-center">
-    						<h2 class="mb-0"><a href="sermon.html">Let the Bible Motivate You</a></h2>
-    						<div class="meta">
-		  						<p class="mb-0">
-			  						<span>24 Mars 2021</span>
-		  						</p>
-		  					</div>
-    					</div>
-  					</div>
-        	</div>
-
-        
+			<?php
+			}
+			?>
         </div>
-			</div>
+		</div>
 		</section>
 
-		<section class="ftco-intro img" id="events-section" style="background-image: url(images/bg_3.jpg);">
+		<section class="ftco-intro img" id="events-section" style="background-image: url(views/images/bg_3.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row">
@@ -347,7 +317,7 @@
         			<div class="text p-4 d-flex align-items-center">
         				<div>
 	        				<span class="time"><?= $event['datetime_event'] ?></span>
-	        				<h3><a href="#"><?= $event['tile_event'] ?></a></h3>
+	        				<h3><a href="#"><?= $event['title_event'] ?></a></h3>
 	        				<div class="meta">
 		        				<p class="desc1"><span class="icon-user mr-1"></span> by professor: <a href="#">Jerry Simon</a></p>
 		        				<p class="desc2"><span class="icon-location"></span> <?= $event['description_event'] ?></p>
@@ -376,10 +346,12 @@
 				<div class="row">
 				<?php	
          		$j = 0;
-				 $total = 0;
+				 $totalInAr = 0;
 				 foreach($donations as $donation){
 					 $j++;
-            $totalInAr =  $total + $donation['montant'];  
+		   $dollarVal =  $donation['montant']/4055.41;
+		   $dntInDollar = number_format($dollarVal, 2, '.', '');
+            $totalInAr =  $totalInAr + $donation['montant'];  
             $totalInDollar = $totalInAr /4000 ;
             ?>
                 				<!-- one cause -->
@@ -387,15 +359,14 @@
 						<div class="cause-entry ftco-animate">
 							<a href="#" class="img" style="background-image: url(views/images/donation/<?= $donation['image'] ?>);"></a>
 							<div class="text p-3">
-								<h3><a href="cause.html"><?= $donation['but'] ?></a></h3>
+								<h3><a href="cause.html"><?= $donation['sujet'] ?></a></h3>
 								<div class="progress mb-4">
 								 	<div class="progress-bar color-1" role="progressbar" aria-valuenow="90"
 								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
 								   
 								  	</div>
 								</div>
-								<p class="donate"><span class="target-goal">we expect over </span><strong class="number" data-number="<?= $donation['montant'] ?>">0</strong><span>&nbsp;AR</span>&nbsp;/&nbsp;<strong class="number" data-number="<?= $totalInDollar; ?>">0</strong><span>&nbsp;$</p>
-								<p class="description"><?= $donation['description'] ?></p>
+								<p class="donate"><span class="target-goal">we expect over </span><strong class="number" data-number="<?= $donation['montant'] ?>">0</strong><span>&nbsp;AR</span>&nbsp;/&nbsp;<strong class="number" data-number="<?= $dntInDollar; ?>">0</strong><span>&nbsp;$</p>
 								<p><a  data-toggle="modal" data-target="#myModalDonate" class="btn btn-primary">Donner maintenant !</a></p>
 							</div>
 						</div>
@@ -445,7 +416,7 @@
 		</section>
 
 
-		<section class="ftco-daily-verse img" style="background-image: url(images/bg_4.jpg);">
+		<section class="ftco-daily-verse img" style="background-image: url(views/images/bg_4.jpg);">
 			<div class="overlay"></div>
     	<div class="container">
     		<div class="row justify-content-center">
@@ -476,10 +447,14 @@
             <p>As body without the spirit is dead, so also faith without actions is dead</p>
           </div>
         </div>
+		
         <div class="row d-flex">
+			<?php 
+		   foreach($blogs as $blog){
+		?>
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <a href="single.php" class="block-20" style="background-image: url('images/image_1.jpg');">
+              <a href="single.php" class="block-20" style="background-image: url('views/images/blog/<?=$blog['image'];?>);">
               </a>
               <div class="text float-right d-block">
               	<div class="d-flex align-items-center pt-2 mb-4 topp">
@@ -491,8 +466,8 @@
               			<span class="mos">mars</span>
               		</div>
               	</div>
-                <h3 class="heading"><a href="single.php">Why Lead Generation is Key for Business Growth</a></h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <h3 class="heading"><a href="single.php"><?=$blog['object'];?></a></h3>
+                <p><?=$blog['contain_1']?></p>
                 <div class="d-flex align-items-center mt-4 meta">
 	                <p class="mb-0"><a href="#" class="btn btn-primary">Lire plus <span class="ion-ios-arrow-round-forward"></span></a></p>
 	                <p class="ml-auto mb-0">
@@ -503,58 +478,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="single.php" class="block-20" style="background-image: url('images/image_2.jpg');">
-              </a>
-              <div class="text float-right d-block">
-              	<div class="d-flex align-items-center pt-2 mb-4 topp">
-              		<div class="one mr-2">
-              			<span class="day">24</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2021</span>
-              			<span class="mos">mars</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="single.php">Why Lead Generation is Key for Business Growth</a></h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <div class="d-flex align-items-center mt-4 meta">
-	                <p class="mb-0"><a href="#" class="btn btn-primary">Lire plus <span class="ion-ios-arrow-round-forward"></span></a></p>
-	                <p class="ml-auto mb-0">
-	                	<a href="#" class="mr-2">Admin</a>
-	                	<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-	                </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="single.php" class="block-20" style="background-image: url('images/image_3.jpg');">
-              </a>
-              <div class="text float-right d-block">
-              	<div class="d-flex align-items-center pt-2 mb-4 topp">
-              		<div class="one mr-2">
-              			<span class="day">24</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2021</span>
-              			<span class="mos">mars</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="single.php">Why Lead Generation is Key for Business Growth</a></h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <div class="d-flex align-items-center mt-4 meta">
-	                <p class="mb-0"><a href="#" class="btn btn-primary">Lire plus <span class="ion-ios-arrow-round-forward"></span></a></p>
-	                <p class="ml-auto mb-0">
-	                	<a href="#" class="mr-2">Admin</a>
-	                	<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-	                </p>
-                </div>
-              </div>
-            </div>
-          </div>
+		  <?php
+		   }
+		  ?>
         </div>
       </div>
     </section>
@@ -569,15 +495,18 @@
           </div>
         </div>
         <div class="row">
+			<?php
+				foreach($responsables as $responsable){
+			?>
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">
 							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_1.jpg);"></div>
+								<div class="img align-self-stretch" style="background-image: url(views/images/responsible/<?=$responsable['image']?>);"></div>
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
-									<h3 class="mb-2">Lloyd Wilson</h3>
-									<span class="position mb-4">Lead Profesor</span>
+									<h3 class="mb-2"><?=$responsable['name_resp']?></h3>
+									<span class="position mb-4"><?=$responsable['function'];?></span>
 									<div class="faded">
 										<ul class="ftco-social text-center">
 			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -590,157 +519,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_2.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Rachel Parker</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_3.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_4.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_5.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_6.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_3.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Ian Smith</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(images/Staff_4.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<h3 class="mb-2">Alicia Henderson</h3>
-									<span class="position mb-4">Lead Profesor</span>
-									<div class="faded">
-										<ul class="ftco-social text-center">
-			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              </ul>
-		              </div>
-		            </div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<?php
+				}
+			?>
+				
     	</div>
     </section>
 
@@ -757,7 +539,7 @@
         <div class="row block-9">
           <div class="col-md-7 order-md-last d-flex">
             
-            <form class="bg-light p-4 p-md-5 contact-form addtomail" >
+            <form class="bg-light p-4 p-md-5 contact-form addtomail" method="POST">
               
               <div class="form-group">
                 <input type="text" class="form-control addtomailname" placeholder="Votre Nom" name="name">
@@ -765,16 +547,19 @@
               <div class="form-group">
                 <input type="email" class="form-control addtomailemail" placeholder="Votre Email" name="email">
               </div>
+			  <div class="form-group">
+				  <input type="hidden" name="to" value="<?=$emailAdmin;?>">
+			</div>
               <div class="form-group">
-                <input type="text" class="form-control addtomailsubject" placeholder="Object" name="objet">
+                <input type="text" class="form-control addtomailsubject" placeholder="Object" name="object">
               </div>
               <div class="form-group">
                 <textarea  cols="30" rows="7" class="form-control addtomailmsg" placeholder="Message" name="msg"></textarea>
               </div>
               <div class="form-group">
-                <input type="submit"  value="Envoyer le message" class="btn btn-primary py-3 px-5 addtomailbtn"><br><br>
+                <input type="submit"  value="Envoyer le message" class="btn btn-primary py-3 px-5 addtomailbtn" name="sendMessage"><br><br>
                
-                <?php include 'Admin/php/error.php'; ?>
+               
               </div>
             </form>
           
@@ -848,28 +633,28 @@
         </div>
     		<div class="row">
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery_1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
+						<a href="views/images/gallery_1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
+						<a href="views/images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
+						<a href="views/images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
+						<a href="views/images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
@@ -889,7 +674,7 @@
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                <li class="ftco-animate"><a href="Admin/index.php"><span class="icon-gears"></span></a></li>
+                <li class="ftco-animate"><a href="index.php?controller=Admin&task=logIn"><span class="icon-gears"></span></a></li>
               </ul>
             </div>
           </div>
@@ -980,8 +765,7 @@
   <script src="./views/javascript/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="./views/javascript/google-map.js"></script>
-  
-  <script src="./views/javascript/main.js"></script>
+   <script src="./views/javascript/mailbox.js"></script>
   <!-- Initialize Bootstrap functionality -->
   <script>
     // Initialize tooltip component

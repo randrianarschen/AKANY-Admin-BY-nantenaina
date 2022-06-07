@@ -8,6 +8,6 @@ class Mailbox extends Model{
   public function getReceiverName($to){
       $results =$this->pdo-> prepare("SELECT * FROM {$this->table} WHERE email_receiver= :to");
       $result = $results->execute(['to'=>$to]);
-      return $result['name_sender']??"bob";
+      return $result['name_sender'];
   }
 } 
