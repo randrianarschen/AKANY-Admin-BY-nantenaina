@@ -27,7 +27,16 @@
     <link rel="stylesheet" href="./views/css/style.css">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
+	<?php
+	    $rspble = Count($responsables);
+		$neededInAr = 0;
+		foreach($donations as $donation){
+			$neededInAr = $neededInAr + $donation['montant'];
+			$neededInDollar =  $neededInAr/4000;
+		}
+	    $nbrEvents =Count($events);
+       
+	?>  
 	  
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
@@ -155,7 +164,7 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-user"></span>
               	</div>
-                <strong class="number" data-number="8">0</strong>
+                <strong class="number" data-number="<?=$rspble;?>">0</strong>
                 <span>Résponsables</span>
               </div>
             </div>
@@ -166,7 +175,8 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-money"></span>
               	</div>
-                <strong class="number" data-number="<?= $totalnDollar; ?>">0</strong>&nbsp;$
+				  <strong class="number" data-number="<?=$neededInAr?>">0</strong>&nbsp;Ar
+                <strong class="number" data-number="<?=$neededInDollar?>">0</strong>&nbsp;$
                 <span>besoin</span>
               </div>
             </div>
@@ -177,7 +187,7 @@
               	<div class="icon d-flex justify-content-center align-items-center">
               		<span class="icon-home"></span>
               	</div>
-                <strong class="number" data-number="206">0</strong>
+                <strong class="number" data-number="<?= $nbrEvents ?>">0</strong>
                 <span>Occupation</span>
               </div>
             </div>
@@ -245,31 +255,28 @@
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
           </div>
         </div>
-		<?php
-		 for($i=0;$i<count($witnesses)/3;$i++){
-		?>
+	
 				<div class="row">
 					<?php
-					for($j=$i; $j<$i+3; $j++){
-						$witness = $witnesses[$i*3+$j];
+				foreach($witnesses as $witness){   
 					?>
         	<div class="col-md-4">
         		<div class="sermon-wrap ftco-animate">
-    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(./views/images/sermon-1.jpg);">
+    					<div class="img d-flex align-items-center justify-content-center" style="background-image: url(./views/images/witness/<?=$witness['image']?>);">
     						<div class="text-content p-4 text-center">
     							<span>par:</span>
     							<h3>Gilbert Ranaivo</h3>
     							<p class="">
-										<a href="https://vimeo.com/45830194" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
+										<a href="<?=$witness['link_video']?>" class="btn-custom mb-2 p-2 text-center popup-vimeo"><span class="icon-play"></span> Lire</a>
 										<a href="#" class="btn-custom p-2 text-center"><span class="icon-download"></span> Télécharger</a>
 									</p>
     						</div>
     					</div>
     					<div class="text pt-3 text-center">
-    						<h2 class="mb-0"><a href="sermon.html">Let the Sunset Inspire You</a></h2>
+    						<h2 class="mb-0"><a href="sermon.html"><?=$witness['title']?></a></h2>
     						<div class="meta">
 		  						<p class="mb-0">
-			  						<span>24 Mars 2021</span>
+			  						<span><?=$witness['date_publication']?></span>
 		  						</p>
 		  					</div>
     					</div>
@@ -279,10 +286,7 @@
 			}
 			?>
         </div>
-		<?php
-		 }
-		?>
-			</div>
+		</div>
 		</section>
 
 		<section class="ftco-intro img" id="events-section" style="background-image: url(views/images/bg_3.jpg);">
@@ -501,8 +505,8 @@
 							</div>
 							<div class="text d-flex align-items-center pt-3 text-center">
 								<div>
-									<h3 class="mb-2"><?=$responsible['name_resp']?></h3>
-									<span class="position mb-4"><?=$responsible['function'];?></span>
+									<h3 class="mb-2"><?=$responsable['name_resp']?></h3>
+									<span class="position mb-4"><?=$responsable['function'];?></span>
 									<div class="faded">
 										<ul class="ftco-social text-center">
 			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -535,7 +539,7 @@
         <div class="row block-9">
           <div class="col-md-7 order-md-last d-flex">
             
-            <form class="bg-light p-4 p-md-5 contact-form addtomail" >
+            <form class="bg-light p-4 p-md-5 contact-form addtomail" method="POST">
               
               <div class="form-group">
                 <input type="text" class="form-control addtomailname" placeholder="Votre Nom" name="name">
@@ -543,14 +547,17 @@
               <div class="form-group">
                 <input type="email" class="form-control addtomailemail" placeholder="Votre Email" name="email">
               </div>
+			  <div class="form-group">
+				  <input type="hidden" name="to" value="<?=$emailAdmin;?>">
+			</div>
               <div class="form-group">
-                <input type="text" class="form-control addtomailsubject" placeholder="Object" name="objet">
+                <input type="text" class="form-control addtomailsubject" placeholder="Object" name="object">
               </div>
               <div class="form-group">
                 <textarea  cols="30" rows="7" class="form-control addtomailmsg" placeholder="Message" name="msg"></textarea>
               </div>
               <div class="form-group">
-                <input type="submit"  value="Envoyer le message" class="btn btn-primary py-3 px-5 addtomailbtn"><br><br>
+                <input type="submit"  value="Envoyer le message" class="btn btn-primary py-3 px-5 addtomailbtn" name="sendMessage"><br><br>
                
                
               </div>
@@ -667,7 +674,7 @@
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                <li class="ftco-animate"><a href="Admin/index.php"><span class="icon-gears"></span></a></li>
+                <li class="ftco-animate"><a href="index.php?controller=Admin&task=logIn"><span class="icon-gears"></span></a></li>
               </ul>
             </div>
           </div>
@@ -758,8 +765,7 @@
   <script src="./views/javascript/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="./views/javascript/google-map.js"></script>
-  
-  <script src="./views/javascript/main.js"></script>
+   <script src="./views/javascript/mailbox.js"></script>
   <!-- Initialize Bootstrap functionality -->
   <script>
     // Initialize tooltip component

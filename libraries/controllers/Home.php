@@ -18,6 +18,9 @@ class Home extends Controller
         $responsables = $responsables->findAll();
         $witnesses = new \models\Witness;
         $witnesses = $witnesses->findAll();
-        \Renderer::renderCust(compact('donations', 'events', 'blogs', 'responsables', 'witnesses'));
+        // $email = new \models\Contact;
+        // $emailAdmin = $email->getEmail();
+        $page ='indexfr';
+        \Renderer::renderCust(compact('page', 'donations', 'events', 'blogs', 'responsables', 'witnesses', 'emailAdmin'));
     }
 }

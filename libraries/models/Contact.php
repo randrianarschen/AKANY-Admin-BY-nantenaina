@@ -6,7 +6,7 @@ class Contact extends Model{
     protected $columns = "address, phone_num, email, fb_page";
     protected $col = "address OR phone_num OR email OR fb_page";
     public  function getEmail(){
-       $results =  $this->findOne(1);
-        return $results['email'];
+     $contact = $this->findOne(1);
+     return $contact['email'] ;
     }
 }

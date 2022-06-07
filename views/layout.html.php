@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -177,7 +178,7 @@ $("#editor").wysibb();
           </a>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <a href="index.php?controller=admin&task=logOut" class="nav-link"  role="button">
          <img src="views/icons/disconnect.png"  width="20" height="20">
         </a>
         </li>
