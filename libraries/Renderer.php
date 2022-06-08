@@ -61,6 +61,7 @@ class Renderer
   public static function  renderCust(array $var = []){
     extract($var);
     require("views/$page.html.php");
+   
 
   }
        

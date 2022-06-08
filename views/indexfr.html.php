@@ -1,4 +1,14 @@
+<?php
 
+	     $rspble = Count($responsables);
+		$neededInAr = 0;
+		foreach($donations as $donation){
+			$neededInAr = $neededInAr + $donation['montant'];
+			$neededInDollar =  $neededInAr/4000;
+		}
+	     $nbrEvents =Count($events);
+       
+	?>  
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +16,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+       
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -26,18 +36,7 @@
     <link rel="stylesheet" href="./views/css/icomoon.css">
     <link rel="stylesheet" href="./views/css/style.css">
   </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	<?php
-	    $rspble = Count($responsables);
-		$neededInAr = 0;
-		foreach($donations as $donation){
-			$neededInAr = $neededInAr + $donation['montant'];
-			$neededInDollar =  $neededInAr/4000;
-		}
-	    $nbrEvents =Count($events);
-       
-	?>  
-	  
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300"> 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
 			<a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="" style="width: 50px;">&nbsp;Akany Tafita/Sahasoa</a>
@@ -307,9 +306,10 @@
         </div>
 				<div class="row">
 				<?php
-				$i=0;
+			
          		    foreach ($events as $event){
-					  $i++?>
+					
+					  ?>
 					<!--one events  -->
         	<div class="col-md-12 col-lg-6 col-xl-4">
         		<div class="event-wrap d-flex ftco-animate">
@@ -327,7 +327,9 @@
         		</div>
         	</div>
 							<!-- end of one events -->
-							<?php } ?>
+							<?php
+							 }
+							 ?>
         	
 				</div>
 			</div>
@@ -345,10 +347,8 @@
         </div>
 				<div class="row">
 				<?php	
-         		$j = 0;
-				 $totalInAr = 0;
+				$totalInAr = 0;
 				 foreach($donations as $donation){
-					 $j++;
 		   $dollarVal =  $donation['montant']/4055.41;
 		   $dntInDollar = number_format($dollarVal, 2, '.', '');
             $totalInAr =  $totalInAr + $donation['montant'];  
@@ -371,6 +371,11 @@
 							</div>
 						</div>
 					</div>
+					<?php 
+				     }
+                      ?>
+					</div>
+					
          <div class="modal fade lug" id="myModalDonate" role="dialog">
          <div class="modal-dialog" >
             <!-- Modal content-->
@@ -398,11 +403,9 @@
          </div>
       </div>
 					<!-- end of one cause -->
-					<?php 
-				 }
-           ?>
+					
 				
-				</div>
+			
 				<div class="row mt-4 justify-content-end">
 					<div class="col-lg-10">
 						<div class="donated-intro bg-darken p-4 p-md-5">
@@ -539,8 +542,8 @@
         <div class="row block-9">
           <div class="col-md-7 order-md-last d-flex">
             
-            <form class="bg-light p-4 p-md-5 contact-form addtomail" method="POST">
-              
+            <form class="bg-light p-4 p-md-5 contact-form addtomail" >
+             <p class="markAsSent" style="text-align:center;"></p>
               <div class="form-group">
                 <input type="text" class="form-control addtomailname" placeholder="Votre Nom" name="name">
               </div>
@@ -734,22 +737,21 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="https://unpkg.com/feather-icons"></script>
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- <script src="plugins/jquery/jquery.min.js"></script> -->
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <!-- AdminLTE App -->
-  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
   <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 
   <!-- Popper -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
 
   <!-- Latest compiled and minified Bootstrap JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> --> -->
   <script src="./views/javascript/mailbox.js"></script>
   <script src="./views/javascript/jquery.min.js"></script>
   <script src="./views/javascript/jquery-migrate-3.0.1.min.js"></script>
@@ -766,8 +768,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="./views/javascript/google-map.js"></script>
    <script src="./views/javascript/mailbox.js"></script>
+   <script src="./views/javascript/main.js"></script>
   <!-- Initialize Bootstrap functionality -->
-  <script>
+  <!-- <script>
     // Initialize tooltip component
     $(function() {
       $('[data-toggle="tooltip"]').tooltip()
@@ -777,12 +780,12 @@
     $(function() {
       $('[data-toggle="popover"]').popover()
     })
-  </script>
+  </script> -->
   <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/9979a01860.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-  <script src="./views/javascript/js.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script> -->
+ 
 
 
   

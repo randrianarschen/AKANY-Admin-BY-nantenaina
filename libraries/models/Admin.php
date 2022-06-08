@@ -13,7 +13,5 @@ class Admin extends Model {
         $selectOne->execute($var);
         $selectOne = $selectOne->fetch();
         return $selectOne;
-
-        
       }
 }
