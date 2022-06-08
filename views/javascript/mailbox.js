@@ -15,20 +15,23 @@ var addtomailmsg = document.querySelector(".addtomailmsg");
 		xhr.onreadystatechange = function() { 
 			if (this.readyState == 4 && this.status == 200) {
 				var res = this.response;
-				if (res.success) {
+				console.log(res);
+				if (res.success === true) {
 					console.log('message bien envoyé !');
 					addtomailemail.value = "";
 					addtomailsubject.value = "";
 					addtomailname.value = "";
 					addtomailmsg.value = "";
-					addtomailbtn.className = "btn btn-success py-3 px-5 addtomailbtn"
-					addtomailbtn.value = "Envoyé ✔"
-				}
-				else
-				{
-					alert('Veuillez remplir tous les champs!');
 					addtomailbtn.className = "btn btn-danger py-3 px-5 addtomailbtn"
 					addtomailbtn.value = "Send again"
+					document.getElementsByClassName('markAsSent')[0].classList.add('btn-success');
+					document.getElementsByClassName('markAsSent')[0].innerHTML = "message envoyé ✔";
+				}
+				else{
+				
+					document.getElementsByClassName('markAsSent')[0].classList.add('btn-danger');
+					document.getElementsByClassName('markAsSent')[0].innerHTML = "veuillez remplir tous les champs!";
+					
 				}
 			}else if (this.readyState == 4) {
 				
@@ -36,7 +39,7 @@ var addtomailmsg = document.querySelector(".addtomailmsg");
 			}
 		};
 	
-		xhr.open("POST", "index.php?controller=mailbox&task=insert", true);
+		xhr.open("POST", "index.php?controller=mailbox&task=sendMessage", true);
 		xhr.responseType = "json";
 		xhr.send(data);
 	

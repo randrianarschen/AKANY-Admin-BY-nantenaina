@@ -38,7 +38,6 @@ class Model
   }
   public function insertOne(array $td = [])
   {
-    
     $insert = $this->pdo->prepare("INSERT INTO {$this->table}($this->columns)VALUES ($this->valToInsert)");
     $insert->execute($td);
   }
