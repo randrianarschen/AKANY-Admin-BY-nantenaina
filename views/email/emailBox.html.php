@@ -131,7 +131,7 @@
                   <i class="fas fa-sync-alt"></i>
                 </button>
                 <div class="float-right">
-                  1-50/200
+                 <?php echo count($messages).' messages';?>
                   <div class="btn-group">
                     <button type="button" class="btn btn-default btn-sm">
                       <i class="fas fa-chevron-left"></i>
