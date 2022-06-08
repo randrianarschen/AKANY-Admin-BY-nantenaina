@@ -20,27 +20,7 @@
                     <span class="badge bg-danger float-right">12</span>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-envelope"></i> Message envoyés
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-file-alt"></i> Brouillons
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-filter"></i> Message indésirable
-                    <span class="badge bg-danger float-right">65</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-trash-alt"></i> Corbeille
-                  </a>
-                </li>
+              
               </ul>
             </div>
             <!-- /.card-body -->
