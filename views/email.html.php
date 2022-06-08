@@ -1,7 +1,14 @@
 <section class="content">
+  <div class="row">
+  <div class="col-md-12">
+
+  <a class="btn   btn-outline-success btn-lg btn-google btn-block text-uppercase btn-outline" href="https://accounts.google.com/AccountChooser/identifier?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=AccountChooser"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Signup and send message Using Google </a>
+<!--  <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i class="fa fa-lock"></i> Signup Now </button> -->
+</div>
+  </div><br>
       <div class="row">
         <div class="col-md-3">
-        <a href="index.php?controller=Mailbox&task=newMessage" class=" btn btn-danger btn-block mb-3"><i class="fa-solid fa-pen-clip"></i> &nbsp;  &nbsp; Nouveau message</a>
+       
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Dossier</h3>
@@ -20,27 +27,7 @@
                     <span class="badge bg-danger float-right">12</span>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-envelope"></i> Message envoyés
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-file-alt"></i> Brouillons
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-filter"></i> Message indésirable
-                    <span class="badge bg-danger float-right">65</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-trash-alt"></i> Corbeille
-                  </a>
-                </li>
+              
               </ul>
             </div>
             <!-- /.card-body -->
