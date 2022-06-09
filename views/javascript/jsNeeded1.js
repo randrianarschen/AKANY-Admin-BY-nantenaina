@@ -75,8 +75,8 @@ switch(page){
 
 }
 
-var controller = new AbortController();
-  var signal = controller.signal;
+// var controller = new AbortController();
+//   var signal = controller.signal;
 var uploadData = async (url, data) => {
  
   const request = await fetch(url, {method:'POST', body: data});
@@ -90,21 +90,23 @@ var uploadData = async (url, data) => {
       console.log("oops");
     }  
     return response;}
-var sendRef = async (url) => {
-  var response = await fetch(url);
-  var result = await response.json();
-  if(result.ok) {
-    console.log( result);
+var deleteData = async (url) => {
+const request = await fetch(url);
+  const result = await request.json();
+
+  console.log(result);
+  if(result.ok){
+    console.log(result);
   }else{
-    console.log( result.statusText);
+    console.log(result.statusText);
   }
   return result;
 }
 
-var abortDeleting = async () => {
-  controller.abort();
-  console.log('now aborting');
-}
+// var abortDeleting = async () => {
+//   controller.abort();
+//   console.log('now aborting');
+// }
 
 function cancel(event, no, par1, par2){
   event.preventDefault();
@@ -112,13 +114,11 @@ function cancel(event, no, par1, par2){
   var data = new FormData();
   data.append('id', id);
   uploadData("index.php?controller="+par1+"&task="+par2+"&id="+id+"", data).then(response =>{
-  document.getElementById("edit_button"+no).style.display="block";
-  document.getElementById("delete_button"+no).style.display="block";
+  document.getElementById("edit_button"+no).style.display="inline";
+  document.getElementById("delete_button"+no).style.display="inline";
   document.getElementById("save_button"+no).style.display="none";
   document.getElementById("cancel_button"+no).style.display="none"; 
 var td = document.getElementsByClassName("td"+no);
-console.log(Object.values(response));
-console.log(td);
  if(par1 == "witness"){
   td[5].innerHTML= "<img id='image"+no+"' src='views/images/witnesses/"+response.image+"' width='100px' height='100px'>"
   td[4].innerHTML = response.link_video;
@@ -164,9 +164,9 @@ function edit_row(event, no, tdLength)
 {
   event.preventDefault();
  document.getElementById("edit_button"+no).style.display="none";
- document.getElementById("save_button"+no).style.display="block";
+ document.getElementById("save_button"+no).style.display="inline";
  document.getElementById("delete_button"+no).style.display="none";
- document.getElementById("cancel_button"+no).style.display="block";
+ document.getElementById("cancel_button"+no).style.display="inline";
  var td= document.getElementsByClassName("td"+no); 
  var row = document.getElementById('row'+no); 
  for(let k = 0; k<tdLength; k++){
@@ -234,9 +234,9 @@ if(fileArray.length > 0){
                 console.log(val[j]);
            }
       } 
-      document.getElementById("edit_button"+no).style.display="block";
+      document.getElementById("edit_button"+no).style.display="inline";
       document.getElementById("save_button"+no).style.display="none";
-      document.getElementById("delete_button"+no).style.display="block";
+      document.getElementById("delete_button"+no).style.display="inline";
       document.getElementById("cancel_button"+no).style.display="none";
 } 
  else

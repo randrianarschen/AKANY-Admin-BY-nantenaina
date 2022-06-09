@@ -543,7 +543,7 @@
           <div class="col-md-7 order-md-last d-flex">
             
             <form class="bg-light p-4 p-md-5 contact-form addtomail" >
-             <p class="markAsSent" style="text-align:center;"></p>
+             
               <div class="form-group">
                 <input type="text" class="form-control addtomailname" placeholder="Votre Nom" name="name">
               </div>
@@ -559,6 +559,7 @@
               <div class="form-group">
                 <textarea  cols="30" rows="7" class="form-control addtomailmsg" placeholder="Message" name="msg"></textarea>
               </div>
+			  <p class="markAsSent" style="text-align:center;"></p>
               <div class="form-group">
                 <input type="submit"  value="Envoyer le message" class="btn btn-primary py-3 px-5 addtomailbtn" name="sendMessage"><br><br>
                
