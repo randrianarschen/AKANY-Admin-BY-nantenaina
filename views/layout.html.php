@@ -489,7 +489,8 @@ $("#editor").wysibb();
   <script src="./views/javascript/jsNeeded2.js"></script>
   <script src="file:///C:/Users/NANTENAINA/Downloads/Compressed/AdminLTE-3.2.0/AdminLTE-3.2.0/build/js/CardRefresh.js"></script>
   <script src = "./views/javascript/jsNeeded3.js"></script>
-
+  <script src="views/javascript/manageMsg.js"></script>
+ 
 </body>
 
 </html>

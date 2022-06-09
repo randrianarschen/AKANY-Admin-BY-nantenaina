@@ -28,7 +28,7 @@ class Witness extends Controller
           $ext = explode('.', $img);
           $file_ext = strtolower(end($ext));
           $image = rand(1, 1000000) . '.' . $file_ext;
-          $domain = 'witnesses';
+          $domain = 'witness';
           $Model = $this->model;
           $id= 0;
           $modelMethod = 'insertOne';

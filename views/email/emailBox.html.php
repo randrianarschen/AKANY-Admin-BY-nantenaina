@@ -27,10 +27,12 @@
 	$yrs	 = round($diff / 31207680 );
 	
 	// Check for seconds
-	if($sec <= 60) {
+ if($sec<1){
+    $timeAgo = "less than 1 second ago";
+  }
+else	if($sec <= 60) {
 		$timeAgo =  "$sec seconds ago";
 	}
-	
 	// Check for minutes
 	else if($min <= 60) {
 		if($min==1) {
@@ -90,7 +92,7 @@
 			$timeAgo =  "$yrs years ago";
 		}
 	}
-    echo $timeAgo;
+   echo$timeAgo;
 }
 ?>
 <div class="col-md-9">
@@ -148,13 +150,15 @@
                 <table class="table table-hover table-striped">
                   <tbody>
                   <?php
-
-                   foreach($messages as $message){ ?>  
-                  <tr>
+                   $i = 0;
+                   foreach($messages as $message){ 
+                     $i++
+                     ?>  
+                  <tr class="">
+                    <td class="id_msg" style="display:none"><?=$message['id']?></td>
                     <td>
-                      <div class="icheck-primary">
-                        <input type="checkbox" value="" id="check1">
-                        <label for="check1"></label>
+                      <div class="check-primary">
+                        <input type="checkbox" value="" class="check1">
                       </div>
                     </td>
                     <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
@@ -162,7 +166,9 @@
                     <td class="mailbox-subject"><b><?=$message['subject'];?></b> - <?=$message['message']?>...
                     </td>
                     <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date"><?php time_passed(strtotime($message['time']))?></td>
+                    <td class="mailbox-date"><p class = "time"><?php time_passed(strtotime($message['time']))?></p><button type="button" disabled=true  style="display:none;" class="btn btn-sm delete_msg">
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                  </button></td>
                   </tr>
                   <?php } ?>
                   </tbody>
