@@ -11,7 +11,8 @@ class Admin extends Model {
     public function matchData(array $var = []){
         $selectOne = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE username_admin = :name_admin  AND password_admin = :shaPass");
         $selectOne->execute($var);
-        $selectOne = $selectOne->fetch();
-        return $selectOne;
+        $select = $selectOne->fetch();
+        var_dump($select);
+        return $select;
       }
 }

@@ -19,7 +19,7 @@ class Admin extends Controller
         if (isset($_POST['update'])) {
             if (isset($_POST['newAdminName']) && isset($_POST['currentPass']) && isset($_POST['newPass']) && isset($_POST['newPassConfirm'])) {
                 if (!empty($_POST['newAdminName']) && !empty($_POST['currentPass']) && !empty($_POST['newPass']) && !empty($_POST['newPassConfirm']) && !empty($_FILES['image']['name'])) {
-                    $newAdminName = $_POST['newAdminName'];
+                    $newAdminName = htmlspecialchars($_POST['newAdminName']);
                     $currentPass = $_POST['currentPass'];
                     $newPass = $_POST['newPass'];
                     $newPassConfirm = $_POST['newPassConfirm'];
@@ -28,17 +28,20 @@ class Admin extends Controller
                     $ext = explode('.', $img);
                     $file_ext = strtolower(end($ext));
                     $image = rand(1, 1000000) . '.' . $file_ext;
-                     $shaPass = sha1($currentPass);
+                     $keywords = sha1($currentPass);
                     $passToInsert = sha1($newPass);
                     $col = 'password_admin';
-                    $results = $this->model->search(['col' =>'password_admin', 'keywords' =>$shaPass]);
+                    $results = $this->model->search(compact('col', 'keywords'));
+                    foreach($results as $result){
+                        $id = $result['id'];
+                        $image = $result['image_admin'];
+                    }
                     $domain = 'admin';
                     $Model = $this->model;
                     $modelMethod = 'updateOne';
                     if ($results) {
-                        if ($newPass == $newPassConfirm) {
-                            $id = $results['id'];
-                            \Database::verifyFile(compact('file_ext', 'domain', 'modelMethod', 'Model', 'image'), compact('newAdminName', 'passToInsert', 'image', 'id'));
+                        if ($newPass === $newPassConfirm) {
+                            \Database::verifyFile(compact('file_ext', 'domain', 'modelMethod', 'Model', 'image'), compact('newAdminName', 'passToInsert', 'image', 'image', 'id'));
                         } else {
                             $error_msg = \Renderer::showError("Les mots de passe ne correspondent pas", "danger");
                         }
@@ -67,14 +70,14 @@ class Admin extends Controller
                 $pswd_admin = $_POST['pswd_admin'];
                 $shaPass = sha1($pswd_admin);
                 $results = $this->model->matchData(compact('name_admin', 'shaPass'));
+                echo$name_admin.''.$shaPass;
                 if($results){
-                    session_start();
                     $_SESSION['username_admin'] = $results['username_admin'];
                     $_SESSION['password_admin'] = $results['password_admin'];
-                    $_SESSION['image_admin'] = $results['image_admin'];
+                    $image = $results['image_admin'];
                    $page = 'home/index';
                    $pageTitle = 'Home';
-                   \Renderer::render($page, '', compact('pageTitle',  'emailAdmin'));
+                   \Renderer::render($page, '', compact('pageTitle',  'emailAdmin', 'image'));
                 }else{
                     $error_msg = "Votre nom ou mot de passe n'est pas validé" ;
                     \Renderer::renderCust(compact('page','error_msg'));
